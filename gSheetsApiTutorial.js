@@ -50,25 +50,27 @@ const gsrun = async cl => {
   console.log( data.data.values, );
   let dataArray = data.data.values;
 
+  // compute new data
+
   // ensure consistent row length
   dataArray = dataArray.map( r => {
     while( r.length < 2) r.push( '', );
     return r;
   })
-
+  // compute each row
   let newDataArray = dataArray.map( r => {
     const newValue = `${ r[0] }-${ r[1] }`;
     r.push( newValue, );
     return r;
   });
 
+  // write new data
   const updateOptions = {
     spreadsheetId: SPREADSHEET_ID,
     range: 'Data!E2',
     valueInputOption: 'USER_ENTERED',
     resource: { values: newDataArray, },
   }
-
   let res = await gsapi.spreadsheets.values.update( updateOptions, );
   console.log( res, );
 }
