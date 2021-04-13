@@ -42,7 +42,7 @@ const { initialize, getResults, } = realtyTracValues;
   const results = await getResults();
   // console.log('results\n', JSON.stringify( results, ));
 
-  debugger;
+  // debugger;
   return results;
 })();
 
