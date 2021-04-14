@@ -23,10 +23,14 @@ const { google, } = require( 'googleapis'  , );
  */
 
 // params
-const SPREADSHEET_ID = '1YZGTMnYCqYy-tINIambbwksL5mGO1itpYXjzNH_ZawM'; // test
-// const SPREADSHEET_ID = '17UYEPxffvgel8TaEvGwxz7RhJUHviDvY6R95YE1cSAo'; // api incoming
+const VERSION = 'v4';
 const CLIENT_API_LIST = [ 'https://www.googleapis.com/auth/spreadsheets', ];
-const version = 'v4';
+
+const BANG = '!';
+const WHITESPACE_ZERO = '';
+
+const getSpreadsheetRange = ( sheetName, sheetRange, ) =>
+  [ sheetName, sheetRange, ].join( BANG, );
 
 /**
  * returns a reference to an authorized
@@ -51,7 +55,7 @@ const getGsClient = async () => {
  */
  const getGsApi = async () => {
   const gsClient = await getGsClient();
-  const apiObject = { version, auth: gsClient, };
+  const apiObject = { version: VERSION, auth: gsClient, };
   const gsApi = google.sheets( apiObject, );
   return gsApi;
 };
@@ -61,26 +65,62 @@ const getGsClient = async () => {
  * @param { Object } gsApi reference to the google sheets api
  * @returns { *[][] } array of arrays representing the data grid contained in google sheets
  */
-const getGsRead = async gsApi => {
-  const OPTIONS = {
-    spreadsheetId: SPREADSHEET_ID,
-    range: 'Data!A1:B5',
-  };
-  const dataRangeImport = await gsApi.spreadsheets.values.get( OPTIONS, );
+const getGsRead = async ( gsApi, spreadsheetId, sheetName, sheetRange, ) => {
+  const range = getSpreadsheetRange( sheetName, sheetRange, );
+  const options = { spreadsheetId, range, };
+  const dataRangeImport = await gsApi.spreadsheets.values.get( options, );
   const dataGrid = dataRangeImport && dataRangeImport.data && dataRangeImport.data.values;
   console.log( dataGrid, );
   return dataGrid;
 }
 
 /**
+ * writes update to google sheets
+ * @param { *[][] } newDataGrid 
+ * @returns 
+ */
+const setGsUpdate = async ( newDataGrid, gsApi, spreadsheetId, sheetName, sheetRange, ) => {
+  const range = getSpreadsheetRange( sheetName, sheetRange, );
+  const options = {
+    spreadsheetId, range,
+    valueInputOption: 'USER_ENTERED',
+    resource: { values: newDataGrid, },
+  }
+  const result = await gsApi.spreadsheets.values.update( options, );
+  return result;
+}
+
+const gsrun = async config => {
+  const { read, write, getCompute, } = config;
+  const { ssid: readSsid  , sheetName: readSheetName  , range: readRange  , } = read;
+  const { ssid: writeSsid , sheetName: writeSheetName , range: writeRange , } = write;
+
+  const gsApi = await getGsApi(); // get reference to google sheets api
+  
+  // fetch old data
+  const originalDataGrid = await getGsRead( gsApi, readSsid, readSheetName, readRange, );
+
+  // compute new data
+  const newDataGrid = await getCompute( originalDataGrid, );
+  
+  // update google sheets with new data
+  const result = await setGsUpdate( newDataGrid, gsApi, writeSsid, writeSheetName, writeRange, );
+  
+  console.log( result, );
+  return result;
+};
+
+// ------------------------ [ BEGIN ] inputs ------------------------
+
+/**
  * computes new data grid based on old data grid
  * @param { *[][] } originalDataGrid
  * @param { *[][] }
  */
-const getGsCompute = originalDataGrid => {
+ const getCompute_test = originalDataGrid => {
   // ensure consistent row length
   const normalizedDataGrid = originalDataGrid.map( row => {
-    while( row.length < 2) row.push( '', );
+    while( row.length < 2) row.push( WHITESPACE_ZERO, );
     return row;
   })
 
@@ -94,29 +134,23 @@ const getGsCompute = originalDataGrid => {
   return newDataGrid;
 }
 
-/**
- * writes update to google sheets
- * @param { *[][] } newDataGrid 
- * @returns 
- */
-const setGsUpdate = async ( newDataGrid, gsApi, ) => {
-  const options = {
-    spreadsheetId: SPREADSHEET_ID,
-    range: 'Data!E2',
-    valueInputOption: 'USER_ENTERED',
-    resource: { values: newDataGrid, },
-  }
-  const result = await gsApi.spreadsheets.values.update( options, );
-  return result;
+const SHEET_NAME = 'Data';
+const SPREADSHEET_ID = '1YZGTMnYCqYy-tINIambbwksL5mGO1itpYXjzNH_ZawM'; // test
+// const SPREADSHEET_ID = '17UYEPxffvgel8TaEvGwxz7RhJUHviDvY6R95YE1cSAo'; // api incoming
+const TEST_CONFIG = {
+  read: {
+    ssid: SPREADSHEET_ID,
+    sheetName: SHEET_NAME,
+    range: 'A1:B5',
+  },
+  write: {
+    ssid: SPREADSHEET_ID,
+    sheetName: SHEET_NAME,
+    range: 'E2',
+  },
+  getCompute: getCompute_test,
 }
 
-const gsrun = async () => {
-  const gsApi = await getGsApi(); // get reference to google sheets api
-  const originalDataGrid = await getGsRead( gsApi, ); // fetch old data
-  const newDataGrid = await getGsCompute( originalDataGrid, ); // compute new data
-  const result = await setGsUpdate( newDataGrid, gsApi, ); // update google sheets with new data
-  console.log( result, );
-  return result;
-};
+// ------------------------ [ END ] inputs ------------------------
 
-gsrun();
+gsrun( TEST_CONFIG, );
