@@ -8,6 +8,8 @@ const SYMBOLS = {
   TEXT_CONTENT: 'textContent',
 };
 
+// [ BEGIN ] puppeteer
+
 /**
  * returns a random time delay
  * @param { Number } [ fixedSeconds = 2 ]
@@ -46,15 +48,32 @@ const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 // // reddit
 // const TARGET_URL = 'https://old.reddit.com/r/node';
 
-// // realtor
-// // const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/York_NE/N-York-Ave/';
-// const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/68521/7th-St';
+// realtor
+// const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/York_NE/N-York-Ave/';
+const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/68521/7th-St';
 
-// realtyTracTargets
-const TARGET_URL = 'https://www.realtytrac.com/home-values/az/maricopa-county/scottsdale/85250/e-horseshoe-ln/';
+// // realtyTracTargets
+// const TARGET_URL = 'https://www.realtytrac.com/home-values/az/maricopa-county/scottsdale/85250/e-horseshoe-ln/';
 
+// [ END ] puppeteer
+
+// -------------------------------------------------------------------------
+
+// [ BEGIN ] google sheets api
+
+// [ END ] google sheets api
+
+// -------------------------------------------------------------------------
+
+// [ BEGIN ] exports
+
+exports.WAIT = WAIT;
 exports.SYMBOLS = SYMBOLS;
 exports.BROWSER = BROWSER;
-exports.WAIT = WAIT;
-exports.TARGET_URL = TARGET_URL;
 exports.USER_AGENT = USER_AGENT;
+exports.TARGET_URL = TARGET_URL;
+
+exports.SPREADSHEET_ID = SPREADSHEET_ID;
+// exports.CLIENT_API_LIST = CLIENT_API_LIST;
+
+// [ END ] exports
