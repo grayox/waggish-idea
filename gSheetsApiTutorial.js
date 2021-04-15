@@ -1,12 +1,9 @@
-const { google, } = require( 'googleapis', );
-const keys = require( './keys.json' );
-
 /**
  * @name Google Sheets API Tutorial
  * 
  * @description implements code in the following tutorial video
  * 
- * tutorial Google Sheets API - JavaScript NodeJS Tutorial
+ * tutorial: Google Sheets API - JavaScript NodeJS Tutorial
  * by: Learn Google Spreadsheets https://www.youtube.com/channel/UC8p19gUXJYTsUPEpusHgteQ
  * @see https://www.youtube.com/watch?v=MiPpQzW_ya0
  * 
@@ -18,6 +15,9 @@ const keys = require( './keys.json' );
  * @see https://developers.google.com/sheets/api/quickstart/nodejs // package
  * @see https://developers.google.com/identity/protocols/googlescopes // scopes
  */
+
+const { google, } = require( 'googleapis', );
+const keys = require( './keys.json' );
 
 const SPREADSHEET_ID = '1YZGTMnYCqYy-tINIambbwksL5mGO1itpYXjzNH_ZawM';
 

@@ -1,15 +1,9 @@
-const keys        = require( './keys.json' , );
-const { google, } = require( 'googleapis'  , );
-// const {
-//   SPREADSHEET_ID, CLIENT_API_LIST,
-// } = require( './config', );
-
 /**
  * @name Google Sheets API Tutorial
  * 
- * @description implements code in the following tutorial video
+ * @description provides an interface with the google sheets api
  * 
- * tutorial Google Sheets API - JavaScript NodeJS Tutorial
+ * tutorial: Google Sheets API - JavaScript NodeJS Tutorial
  * by: Learn Google Spreadsheets https://www.youtube.com/channel/UC8p19gUXJYTsUPEpusHgteQ
  * @see https://www.youtube.com/watch?v=MiPpQzW_ya0
  * 
@@ -21,6 +15,9 @@ const { google, } = require( 'googleapis'  , );
  * @see https://developers.google.com/sheets/api/quickstart/nodejs // package
  * @see https://developers.google.com/identity/protocols/googlescopes // scopes
  */
+
+const keys        = require( './keys.json' , );
+const { google, } = require( 'googleapis'  , );
 
 // params
 const VERSION = 'v4';
@@ -90,7 +87,7 @@ const setGsUpdate = async ( newDataGrid, gsApi, spreadsheetId, sheetName, sheetR
   return result;
 }
 
-const gsrun = async config => {
+const setGoogleSheetsApi = async config => {
   const { read, write, getCompute, } = config;
   const { ssid: readSsid  , sheetName: readSheetName  , range: readRange  , } = read;
   const { ssid: writeSsid , sheetName: writeSheetName , range: writeRange , } = write;
@@ -110,7 +107,7 @@ const gsrun = async config => {
   return result;
 };
 
-// ------------------------ [ BEGIN ] inputs ------------------------
+// ------------------------ [ BEGIN ] test ------------------------
 
 /**
  * computes new data grid based on old data grid
@@ -151,6 +148,8 @@ const TEST_CONFIG = {
   getCompute: getCompute_test,
 }
 
-// ------------------------ [ END ] inputs ------------------------
+setGoogleSheetsApi( TEST_CONFIG, );
 
-gsrun( TEST_CONFIG, );
+// ------------------------ [ END ] test ------------------------
+
+exports.googleSheetsApi = setGoogleSheetsApi;

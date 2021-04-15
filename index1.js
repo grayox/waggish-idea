@@ -23,17 +23,15 @@
 
 const config  = require( './config'  );
 // const reddit  = require( './reddit'  );
-const realtor = require( './realtor' );
-// const realtyTracValues = require( './realtyTracValues' );
-const googleSheetsApi = require( './googleSheetsApi' );
+// const realtor = require( './realtor' );
+const realtyTracValues = require( './realtyTracValues' );
 
 // destructured assignments
 const { TARGET_URL, } = config;
 
 // const { initialize, getResults, } = reddit;
-const { initialize, getResults, } = realtor;
-// const { initialize, getResults, } = realtyTracValues;
-const { googleSheetsApi, } = googleSheetsApi;
+// const { initialize, getResults, } = realtor;
+const { initialize, getResults, } = realtyTracValues;
 
 ( async () => {
 

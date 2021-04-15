@@ -61,6 +61,27 @@ const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/68521/7th-St';
 
 // [ BEGIN ] google sheets api
 
+const getCompute = dataGrid => {
+  
+}
+
+const SHEET_NAME = 'Data';
+// const SPREADSHEET_ID = '1YZGTMnYCqYy-tINIambbwksL5mGO1itpYXjzNH_ZawM'; // test
+const SPREADSHEET_ID = '17UYEPxffvgel8TaEvGwxz7RhJUHviDvY6R95YE1cSAo'; // api incoming
+const GSHEETS_API_CONFIG = {
+  read: {
+    ssid: SPREADSHEET_ID,
+    sheetName: SHEET_NAME,
+    range: 'A1:A2', // skip if A2 is not blank because it hasn't been received and cleared yet
+  },
+  write: {
+    ssid: SPREADSHEET_ID,
+    sheetName: SHEET_NAME,
+    range: 'A2',
+  },
+  getCompute,
+}
+
 // [ END ] google sheets api
 
 // -------------------------------------------------------------------------
@@ -71,7 +92,8 @@ exports.WAIT = WAIT;
 exports.SYMBOLS = SYMBOLS;
 exports.BROWSER = BROWSER;
 exports.USER_AGENT = USER_AGENT;
-exports.TARGET_URL = TARGET_URL;
+// exports.TARGET_URL = TARGET_URL;
+exports.GSHEETS_API_CONFIG = GSHEETS_API_CONFIG;
 
 exports.SPREADSHEET_ID = SPREADSHEET_ID;
 // exports.CLIENT_API_LIST = CLIENT_API_LIST;
