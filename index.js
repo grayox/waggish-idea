@@ -26,23 +26,28 @@ const config  = require( './config'  );
 // const reddit  = require( './reddit'  );
 const realtor = require( './realtor' );
 // const realtyTracValues = require( './realtyTracValues' );
-const googleSheetsApi = require( './googleSheetsApi' );
+const google = require( './googleSheetsApi' );
 
 // destructured assignments
 const { GSHEETS_API_CONFIG, } = config;
 // const { initialize, getResults, } = reddit;
 const { initialize, getResults, } = realtor;
 // const { initialize, getResults, } = realtyTracValues;
-const { googleSheetsApi, } = googleSheetsApi;
+const { googleSheetsApi, } = google;
 
 // scraping function
 const getCompute = async incomingDataGrid => {
+  const SKIP_NOTICE = 'Latest result cell is still populated';
+
   // de-structure incoming data grid
   const [[ targetUrl, latestResult, ],] = incomingDataGrid;
 
-  // skip if second cell is not empty
+  // skip if latest result cell is not empty
   const isHasLatestResult = latestResult && latestResult.length;
-  if( isHasLatestResult ) return false;
+  if( isHasLatestResult ) {
+    Logger.log( SKIP_NOTICE, );
+    return false;
+  }
 
   // hit realtor api for incoming url
   await initialize( targetUrl, );

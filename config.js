@@ -61,10 +61,11 @@ const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/68521/7th-St';
 
 // [ BEGIN ] google sheets api
 
-const SHEET_NAME = 'Data';
+const SHEET_NAME = 'Realtor';
 // const SPREADSHEET_ID = '1YZGTMnYCqYy-tINIambbwksL5mGO1itpYXjzNH_ZawM'; // test
 const SPREADSHEET_ID = '17UYEPxffvgel8TaEvGwxz7RhJUHviDvY6R95YE1cSAo'; // api incoming
 const GSHEETS_API_CONFIG = {
+  // getCompute,
   read: {
     ssid: SPREADSHEET_ID,
     sheetName: SHEET_NAME,
@@ -75,7 +76,6 @@ const GSHEETS_API_CONFIG = {
     sheetName: SHEET_NAME,
     range: 'A2',
   },
-  getCompute,
 }
 
 // [ END ] google sheets api
