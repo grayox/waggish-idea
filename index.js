@@ -49,12 +49,20 @@ const getCompute = async incomingDataGrid => {
     return false;
   }
 
-  // hit realtor api for incoming url
+  // debugger;
+
+  // scrape page at incoming url for data
   await initialize( targetUrl, );
   const results = await getResults();
+  // console.log('results\n', JSON.stringify( results, ));
+  // return results;
+
+  // convert results to a 2D array with 1 row and 1 column
+  // with value equal to a stringified JSON object written to the cell
+  const cellContent = JSON.stringify( results, );
+  const newDataGrid = [[ cellContent, ]];
   // debugger;
-  console.log('results\n', JSON.stringify( results, ));
-  return results;
+  return newDataGrid;
 }
 
 const main = async () => {

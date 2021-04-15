@@ -11,6 +11,15 @@ const SYMBOLS = {
 // [ BEGIN ] puppeteer
 
 /**
+ * delays execution of the next line of code
+ * @see https://stackoverflow.com/a/46965281
+ * @param { Number } durationInMs 
+ * @returns { Void }
+ */
+const setDelay = durationInMs =>
+  new Promise( resolve => setTimeout( resolve, durationInMs, ));
+
+/**
  * returns a random time delay
  * @param { Number } [ fixedSeconds = 2 ]
  * @param { Number } [ randomSecondsUpperLimit = 3 ]
@@ -28,13 +37,13 @@ const getSlowMo = ( fixedSeconds = 2, randomSecondsUpperLimit = 3, ) => {
 }
 
 const BROWSER_SELECT = 0;
-const slowMo = getSlowMo( 2, 3, ); // slow down rate in milliseconds
+const slowMo = getSlowMo( 5, 2, ); // slow down rate in milliseconds
 //                    0          1
 const BROWSERS = [ 'chrome', 'firefox', ];
 
 const product = BROWSERS[ BROWSER_SELECT ];
 const BROWSER = {
-  slowMo,
+  // slowMo,
   product, // 'chrome' | 'firefox'
   headless: false, // devtools: true,
 };
@@ -48,9 +57,9 @@ const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 // // reddit
 // const TARGET_URL = 'https://old.reddit.com/r/node';
 
-// realtor
-// const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/York_NE/N-York-Ave/';
-const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/68521/7th-St';
+// // realtor
+// // const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/York_NE/N-York-Ave/';
+// const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/68521/7th-St';
 
 // // realtyTracTargets
 // const TARGET_URL = 'https://www.realtytrac.com/home-values/az/maricopa-county/scottsdale/85250/e-horseshoe-ln/';
@@ -69,12 +78,12 @@ const GSHEETS_API_CONFIG = {
   read: {
     ssid: SPREADSHEET_ID,
     sheetName: SHEET_NAME,
-    range: 'A1:A2', // skip if A2 is not blank because it hasn't been received and cleared yet
+    range: 'A1:B1', // skip if B1 is not blank because it hasn't been received and cleared yet
   },
   write: {
     ssid: SPREADSHEET_ID,
     sheetName: SHEET_NAME,
-    range: 'A2',
+    range: 'B1',
   },
 }
 
@@ -91,4 +100,6 @@ exports.USER_AGENT = USER_AGENT;
 // exports.TARGET_URL = TARGET_URL;
 exports.GSHEETS_API_CONFIG = GSHEETS_API_CONFIG;
 
+exports.slowMo = slowMo;
+exports.setDelay = setDelay;
 // [ END ] exports

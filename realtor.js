@@ -1,7 +1,7 @@
 const config    = require( './config'  );
 const puppeteer = require( 'puppeteer' ); // @see https://github.com/puppeteer/puppeteer
 
-const { USER_AGENT, WAIT, BROWSER, } = config;
+const { USER_AGENT, WAIT, BROWSER, slowMo, setDelay, } = config;
 
 // selectors
 const QUERY_SELECTOR_ALL = 'div.property-records-content table > tbody > tr';
@@ -24,6 +24,7 @@ const self = {
     
     // navigate to target
     await self.page.goto( targetUrl, WAIT, );
+    await self.page.waitForTimeout( slowMo, );
   },
 
   getResults: async () => {
@@ -39,10 +40,10 @@ const self = {
       const status  = await element.$eval( SELECTOR_STATUS  , node => node.innerText.trim());
       const value   = await element.$eval( SELECTOR_VALUE   , node => node.innerText.trim());
 
-      console.log( address, link, status, value, );
+      // console.log( address, link, status, value, );
 
       const result = { address, link, status, value, };
-      console.log( JSON.stringify( result ),);
+      // console.log( JSON.stringify( result ),);
 
       results.push( result, );
     }

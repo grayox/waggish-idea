@@ -77,6 +77,8 @@ const getGsRead = async ( gsApi, spreadsheetId, sheetName, sheetRange, ) => {
  * @returns 
  */
 const setGsUpdate = async ( newDataGrid, gsApi, spreadsheetId, sheetName, sheetRange, ) => {
+  console.log( newDataGrid, );
+  
   const range = getSpreadsheetRange( sheetName, sheetRange, );
   const options = {
     spreadsheetId, range,
@@ -103,7 +105,7 @@ const setGoogleSheetsApi = async config => {
   // update google sheets with new data
   const result = await setGsUpdate( newDataGrid, gsApi, writeSsid, writeSheetName, writeRange, );
   
-  console.log( result, );
+  // console.log( result, );
   return result;
 };
 
