@@ -52,9 +52,9 @@ const getCompute = async incomingDataGrid => {
   return results;
 }
 
-
-( async () => {
+const main = async () => {
   const googleSheetsApiConfig = await { ...GSHEETS_API_CONFIG, getCompute, };
   await googleSheetsApi( googleSheetsApiConfig, );
-})();
+};
 
+main();
