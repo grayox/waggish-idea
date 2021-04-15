@@ -109,46 +109,46 @@ const setGoogleSheetsApi = async config => {
 
 // ------------------------ [ BEGIN ] test ------------------------
 
-/**
- * computes new data grid based on old data grid
- * @param { *[][] } originalDataGrid
- * @param { *[][] }
- */
- const getCompute_test = originalDataGrid => {
-  // ensure consistent row length
-  const normalizedDataGrid = originalDataGrid.map( row => {
-    while( row.length < 2) row.push( WHITESPACE_ZERO, );
-    return row;
-  })
+// /**
+//  * computes new data grid based on old data grid
+//  * @param { *[][] } originalDataGrid
+//  * @param { *[][] }
+//  */
+//  const getCompute_test = originalDataGrid => {
+//   // ensure consistent row length
+//   const normalizedDataGrid = originalDataGrid.map( row => {
+//     while( row.length < 2) row.push( WHITESPACE_ZERO, );
+//     return row;
+//   })
 
-  // compute each row
-  const newDataGrid = normalizedDataGrid.map( row => {
-    const newValue = `${ row[0] }-${ row[1] }`;
-    row.push( newValue, );
-    return row;
-  });
+//   // compute each row
+//   const newDataGrid = normalizedDataGrid.map( row => {
+//     const newValue = `${ row[0] }-${ row[1] }`;
+//     row.push( newValue, );
+//     return row;
+//   });
 
-  return newDataGrid;
-}
+//   return newDataGrid;
+// }
 
-const SHEET_NAME = 'Data';
-const SPREADSHEET_ID = '1YZGTMnYCqYy-tINIambbwksL5mGO1itpYXjzNH_ZawM'; // test
-// const SPREADSHEET_ID = '17UYEPxffvgel8TaEvGwxz7RhJUHviDvY6R95YE1cSAo'; // api incoming
-const TEST_CONFIG = {
-  read: {
-    ssid: SPREADSHEET_ID,
-    sheetName: SHEET_NAME,
-    range: 'A1:B5',
-  },
-  write: {
-    ssid: SPREADSHEET_ID,
-    sheetName: SHEET_NAME,
-    range: 'E2',
-  },
-  getCompute: getCompute_test,
-}
-
-setGoogleSheetsApi( TEST_CONFIG, );
+// const SHEET_NAME = 'Data';
+// const SPREADSHEET_ID = '1YZGTMnYCqYy-tINIambbwksL5mGO1itpYXjzNH_ZawM'; // test
+// // const SPREADSHEET_ID = '17UYEPxffvgel8TaEvGwxz7RhJUHviDvY6R95YE1cSAo'; // api incoming
+// const TEST_CONFIG = {
+  //   read: {
+    //     ssid: SPREADSHEET_ID,
+    //     sheetName: SHEET_NAME,
+    //     range: 'A1:B5',
+    //   },
+    //   write: {
+      //     ssid: SPREADSHEET_ID,
+      //     sheetName: SHEET_NAME,
+      //     range: 'E2',
+      //   },
+      //   getCompute: getCompute_test,
+      // }
+      
+      // setGoogleSheetsApi( TEST_CONFIG, );
 
 // ------------------------ [ END ] test ------------------------
 
