@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/grayox/waggish-idea#readme",
   "dependencies": {
-    "googleapis": "^39.2.0"
+    "googleapis": "^39.2.0",
+    "random-useragent": "^0.5.0"
   }
 }

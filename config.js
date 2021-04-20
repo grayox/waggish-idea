@@ -46,13 +46,72 @@ const BROWSER = {
   // slowMo,
   product, // 'chrome' | 'firefox'
   headless: false, // devtools: true,
+
+  // anonymous
+  // https://www.youtube.com/watch?v=biWUZAlTnkg | https://www.youtube.com/watch?v=RhzGVhLCiK0
+  userDataDir: './cache',
+  args: [
+    // '--window-size=800,860',
+    // '--proxy-server=socks5://127.0.0.1:1337', // https://stackoverflow.com/a/50233814
+    // '--proxy-server=socks5://127.0.0.1:9050', // https://stackoverflow.com/a/50233814
+    // '--proxy-server=socks4://96.9.77.192:55796', // https://dev.to/sonyarianto/practical-puppeteer-using-proxy-to-browse-a-page-1m82
+    '--no-sandbox', '--start-maximized', '--disable-setuid-sandbox',
+    '--disable-div-shm-usage', '--disable-gpu',
+
+    // google search: public proxy servers
+    // blacklist lookup: https://whatismyipaddress.com/blacklist-check
+    // potential proxy ips: 162.255.201.37
+  ]
 };
 const WAIT = {
-  waitUntil: 'networkidle0', // 'domcontentloaded', // 'networkidle2',
+  waitUntil: 'networkidle2', // 'domcontentloaded', // 'networkidle0',
   // waitForNavigation: // ... is a property alternative to waitUntil
 };
 
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36';
+
+// ---------------- [ BEGIN ] options for anonymous scraping compliance ----------------
+//                             ( @comment out for testing )
+
+// // @see https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#pagegotourl-options
+// // @see https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#pagegotourl-options
+
+// await page.emulateMediaType( 'screen', );  // set before page navigation
+
+// await page.waitForSelector( '#example', {
+//   visible: true,
+// });
+
+// await page.setGeolocation({ latitude: 59.95, longitude: 30.31667 });
+
+// page.setJavaScriptEnabled(enabled);
+
+// page.setViewport(viewport); // set before page navigation
+
+// headers // @see https://httpbin.org/anything | @see https://www.codementor.io/@scrapingdog/10-tips-to-avoid-getting-blocked-while-scraping-websites-16papipe62
+// {
+//   "args": {}, 
+//   "data": "", 
+//   "files": {}, 
+//   "form": {}, 
+//   "headers": {
+//     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", 
+//     "Accept-Encoding": "gzip, deflate, br", 
+//     "Accept-Language": "en-US,en;q=0.5", 
+//     "Host": "httpbin.org", 
+//     "Referer": "https://www.google.com", 
+//     "Upgrade-Insecure-Requests": "1", 
+//     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0", 
+//     "X-Amzn-Trace-Id": "Root=1-607d47be-0fdaa7ac079451be7aaeecaf"
+//   }, 
+//   "json": null, 
+//   "method": "GET", 
+//   "origin": "71.212.180.75", 
+//   "url": "https://httpbin.org/anything"
+// }
+
+
+// ---------------- [ END ] options for anonymous scraping compliance ----------------
 
 // // reddit
 // const TARGET_URL = 'https://old.reddit.com/r/node';

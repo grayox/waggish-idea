@@ -21,26 +21,53 @@
  * @license all rights reserved
  */
 
+// imports
 const config  = require( './config'  );
 // const reddit  = require( './reddit'  );
-// const realtor = require( './realtor' );
-const realtyTracValues = require( './realtyTracValues' );
+const realtor = require( './realtor' );
+// const realtyTracValues = require( './realtyTracValues' );
+const google = require( './googleSheetsApi' );
 
 // destructured assignments
-const { TARGET_URL, } = config;
-
+const { GSHEETS_API_CONFIG, } = config;
 // const { initialize, getResults, } = reddit;
-// const { initialize, getResults, } = realtor;
-const { initialize, getResults, } = realtyTracValues;
+const { initialize, getResults, } = realtor;
+// const { initialize, getResults, } = realtyTracValues;
+const { googleSheetsApi, } = google;
 
-( async () => {
+// scraping function
+const getCompute = async incomingDataGrid => {
+  const SKIP_NOTICE = 'Latest result cell is still populated';
 
-  await initialize( TARGET_URL, );
+  // de-structure incoming data grid
+  const [[ targetUrl, latestResult, ],] = incomingDataGrid;
 
-  const results = await getResults();
-  // console.log('results\n', JSON.stringify( results, ));
+  // skip if latest result cell is not empty
+  const isHasLatestResult = latestResult && latestResult.length;
+  if( isHasLatestResult ) {
+    Logger.log( SKIP_NOTICE, );
+    return false;
+  }
 
   // debugger;
-  return results;
-})();
 
+  // scrape page at incoming url for data
+  await initialize( targetUrl, );
+  const results = await getResults();
+  // console.log('results\n', JSON.stringify( results, ));
+  // return results;
+
+  // convert results to a 2D array with 1 row and 1 column
+  // with value equal to a stringified JSON object written to the cell
+  const cellContent = JSON.stringify( results, );
+  const newDataGrid = [[ cellContent, ]];
+  // debugger;
+  return newDataGrid;
+}
+
+const main = async () => {
+  const googleSheetsApiConfig = await { ...GSHEETS_API_CONFIG, getCompute, };
+  await googleSheetsApi( googleSheetsApiConfig, );
+};
+
+main();

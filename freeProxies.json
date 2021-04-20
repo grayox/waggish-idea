@@ -1,0 +1,725 @@
+// @see: https://scrapingant.com/free-proxies/
+// @see: https://docs.google.com/spreadsheets/d/1r0b4H4r88RH0Q8ylFljm5gsvUDlSy4t4KBdsPgw-X8s/edit#gid=986116995
+[
+  {
+    "IP": "165.225.77.44",
+    "Port": 8800,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "1 minute ago"
+  },
+  {
+    "IP": "165.225.77.42",
+    "Port": 9400,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "1 minute ago"
+  },
+  {
+    "IP": "188.166.210.52",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "5 minutes ago"
+  },
+  {
+    "IP": "82.200.215.137",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇰🇿 Kazakhstan",
+    "Last Checked": "5 minutes ago"
+  },
+  {
+    "IP": "151.64.154.188",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇮🇹 Italy",
+    "Last Checked": "5 minutes ago"
+  },
+  {
+    "IP": "46.101.59.176",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇬🇧 United Kingdom",
+    "Last Checked": "5 minutes ago"
+  },
+  {
+    "IP": "188.166.152.26",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇬🇧 United Kingdom",
+    "Last Checked": "5 minutes ago"
+  },
+  {
+    "IP": "186.226.174.193",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Country": "🇧🇷 Brazil",
+    "Last Checked": "6 minutes ago"
+  },
+  {
+    "IP": "168.119.137.56",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "6 minutes ago"
+  },
+  {
+    "IP": "80.24.133.109",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇪🇸 Spain",
+    "Last Checked": "8 minutes ago"
+  },
+  {
+    "IP": "45.7.255.74",
+    "Port": 999,
+    "Protocol": "HTTP",
+    "Country": "🇦🇷 Argentina",
+    "Last Checked": "9 minutes ago"
+  },
+  {
+    "IP": "139.9.25.69",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "11 minutes ago"
+  },
+  {
+    "IP": "188.166.179.102",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "12 minutes ago"
+  },
+  {
+    "IP": "35.180.99.42",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Country": "🇨🇦 Canada",
+    "Last Checked": "14 minutes ago"
+  },
+  {
+    "IP": "187.19.207.195",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇧🇷 Brazil",
+    "Last Checked": "15 minutes ago"
+  },
+  {
+    "IP": "165.225.77.42",
+    "Port": 9443,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "16 minutes ago"
+  },
+  {
+    "IP": "213.137.240.243",
+    "Port": 81,
+    "Protocol": "HTTP",
+    "Country": "🇷🇺 Russia",
+    "Last Checked": "17 minutes ago"
+  },
+  {
+    "IP": "79.175.176.254",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇮🇷 Iran",
+    "Last Checked": "17 minutes ago"
+  },
+  {
+    "IP": "116.228.227.211",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "18 minutes ago"
+  },
+  {
+    "IP": "165.225.77.42",
+    "Port": 443,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "18 minutes ago"
+  },
+  {
+    "IP": "165.225.77.44",
+    "Port": 443,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "18 minutes ago"
+  },
+  {
+    "IP": "202.69.59.187",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇵🇰 Pakistan",
+    "Last Checked": "19 minutes ago"
+  },
+  {
+    "IP": "110.87.12.43",
+    "Port": 39356,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "19 minutes ago"
+  },
+  {
+    "IP": "190.3.92.254",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇦🇷 Argentina",
+    "Last Checked": "20 minutes ago"
+  },
+  {
+    "IP": "188.166.215.233",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "25 minutes ago"
+  },
+  {
+    "IP": "101.109.176.38",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇹🇭 Thailand",
+    "Last Checked": "25 minutes ago"
+  },
+  {
+    "IP": "103.107.183.160",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Country": "Unknown",
+    "Last Checked": "25 minutes ago"
+  },
+  {
+    "IP": "188.166.209.200",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "25 minutes ago"
+  },
+  {
+    "IP": "188.166.177.42",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "26 minutes ago"
+  },
+  {
+    "IP": "165.227.229.14",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "26 minutes ago"
+  },
+  {
+    "IP": "189.201.243.138",
+    "Port": 999,
+    "Protocol": "HTTP",
+    "Country": "🇲🇽 Mexico",
+    "Last Checked": "26 minutes ago"
+  },
+  {
+    "IP": "104.236.205.169",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "26 minutes ago"
+  },
+  {
+    "IP": "104.236.123.137",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "26 minutes ago"
+  },
+  {
+    "IP": "203.91.121.212",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "27 minutes ago"
+  },
+  {
+    "IP": "143.202.78.154",
+    "Port": 999,
+    "Protocol": "HTTP",
+    "Country": "🇲🇽 Mexico",
+    "Last Checked": "30 minutes ago"
+  },
+  {
+    "IP": "139.59.252.150",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "30 minutes ago"
+  },
+  {
+    "IP": "165.225.77.44",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "30 minutes ago"
+  },
+  {
+    "IP": "43.225.109.51",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇲🇾 Malaysia",
+    "Last Checked": "30 minutes ago"
+  },
+  {
+    "IP": "143.202.78.249",
+    "Port": 999,
+    "Protocol": "HTTP",
+    "Country": "🇲🇽 Mexico",
+    "Last Checked": "30 minutes ago"
+  },
+  {
+    "IP": "185.4.30.50",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇮🇷 Iran",
+    "Last Checked": "31 minutes ago"
+  },
+  {
+    "IP": "120.196.112.6",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "33 minutes ago"
+  },
+  {
+    "IP": "194.181.134.81",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇵🇱 Poland",
+    "Last Checked": "34 minutes ago"
+  },
+  {
+    "IP": "91.214.179.11",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇺🇦 Ukraine",
+    "Last Checked": "34 minutes ago"
+  },
+  {
+    "IP": "47.98.170.216",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "37 minutes ago"
+  },
+  {
+    "IP": "78.110.7.192",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇸🇦 Saudi Arabia",
+    "Last Checked": "38 minutes ago"
+  },
+  {
+    "IP": "177.21.30.159",
+    "Port": 9999,
+    "Protocol": "HTTP",
+    "Country": "🇧🇷 Brazil",
+    "Last Checked": "39 minutes ago"
+  },
+  {
+    "IP": "165.225.77.47",
+    "Port": 9443,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "40 minutes ago"
+  },
+  {
+    "IP": "64.64.232.80",
+    "Port": 1035,
+    "Protocol": "SOCKS4",
+    "Country": "🇨🇦 Canada",
+    "Last Checked": "41 minutes ago"
+  },
+  {
+    "IP": "181.78.21.146",
+    "Port": 999,
+    "Protocol": "HTTP",
+    "Country": "🇨🇴 Colombia",
+    "Last Checked": "42 minutes ago"
+  },
+  {
+    "IP": "45.76.188.92",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "43 minutes ago"
+  },
+  {
+    "IP": "128.199.88.246",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "44 minutes ago"
+  },
+  {
+    "IP": "149.28.146.208",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "44 minutes ago"
+  },
+  {
+    "IP": "167.99.245.133",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "44 minutes ago"
+  },
+  {
+    "IP": "188.166.176.31",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "44 minutes ago"
+  },
+  {
+    "IP": "139.59.254.67",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "45 minutes ago"
+  },
+  {
+    "IP": "165.225.77.42",
+    "Port": 9480,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "45 minutes ago"
+  },
+  {
+    "IP": "65.1.241.44",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "45 minutes ago"
+  },
+  {
+    "IP": "139.59.252.143",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "45 minutes ago"
+  },
+  {
+    "IP": "139.59.241.81",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "45 minutes ago"
+  },
+  {
+    "IP": "143.198.193.90",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "45 minutes ago"
+  },
+  {
+    "IP": "3.139.235.232",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "45 minutes ago"
+  },
+  {
+    "IP": "143.202.78.227",
+    "Port": 999,
+    "Protocol": "HTTP",
+    "Country": "🇲🇽 Mexico",
+    "Last Checked": "45 minutes ago"
+  },
+  {
+    "IP": "35.226.244.14",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "45 minutes ago"
+  },
+  {
+    "IP": "18.212.125.165",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "45 minutes ago"
+  },
+  {
+    "IP": "111.56.101.65",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "45 minutes ago"
+  },
+  {
+    "IP": "186.226.174.193",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇧🇷 Brazil",
+    "Last Checked": "47 minutes ago"
+  },
+  {
+    "IP": "167.172.180.40",
+    "Port": 36760,
+    "Protocol": "HTTP",
+    "Country": "🇬🇧 United Kingdom",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "165.225.77.44",
+    "Port": 9480,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "54.255.218.28",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "35.158.57.23",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇩🇪 Germany",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "179.157.4.228",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Country": "🇧🇷 Brazil",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "195.199.199.227",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇭🇺 Hungary",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "183.213.26.12",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "145.40.68.155",
+    "Port": 9480,
+    "Protocol": "HTTP",
+    "Country": "🇳🇱 Netherlands",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "183.89.177.172",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇹🇭 Thailand",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "47.103.130.208",
+    "Port": 38888,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "178.32.129.31",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "162.255.201.37",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "116.228.227.211",
+    "Port": 443,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "165.225.77.44",
+    "Port": 9443,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "165.225.77.42",
+    "Port": 9401,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "119.4.167.141",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "152.136.39.231",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "183.88.226.50",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇹🇭 Thailand",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "103.103.2.6",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "Unknown",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "128.199.188.60",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "103.103.3.6",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "Unknown",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "116.202.103.223",
+    "Port": 10774,
+    "Protocol": "SOCKS4",
+    "Country": "🇮🇳 India",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "45.160.224.97",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "Unknown",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "165.225.77.42",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "128.199.60.240",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇳🇱 Netherlands",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "45.160.224.2",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "Unknown",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "116.58.237.220",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇹🇭 Thailand",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "218.25.36.247",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "188.166.181.51",
+    "Port": 8080,
+    "Protocol": "HTTP",
+    "Country": "🇸🇬 Singapore",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "80.73.9.238",
+    "Port": 1080,
+    "Protocol": "SOCKS5",
+    "Country": "🇺🇦 Ukraine",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "165.225.77.44",
+    "Port": 9400,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "165.225.77.42",
+    "Port": 8800,
+    "Protocol": "HTTP",
+    "Country": "🇫🇷 France",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "195.144.21.185",
+    "Port": 1080,
+    "Protocol": "SOCKS5",
+    "Country": "🇺🇦 Ukraine",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "187.95.125.71",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇧🇷 Brazil",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "131.255.239.38",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇧🇷 Brazil",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "47.101.213.111",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇨🇳 China",
+    "Last Checked": "1 hour ago"
+  },
+  {
+    "IP": "8.134.33.11",
+    "Port": 3128,
+    "Protocol": "HTTP",
+    "Country": "🇺🇸 United States",
+    "Last Checked": "1 hour ago"
+  }
+]
