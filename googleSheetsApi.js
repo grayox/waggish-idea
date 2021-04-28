@@ -78,7 +78,7 @@ const getGsRead = async ( gsApi, spreadsheetId, sheetName, sheetRange, ) => {
  */
 const setGsUpdate = async ( newDataGrid, gsApi, spreadsheetId, sheetName, sheetRange, ) => {
   console.log( newDataGrid, );
-  
+
   const range = getSpreadsheetRange( sheetName, sheetRange, );
   const options = {
     spreadsheetId, range,
