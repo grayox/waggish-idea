@@ -29,7 +29,7 @@ const reddit  = require( './reddit'  );
 const google = require( './googleSheetsApi' );
 
 // destructured assignments
-const { GSHEETS_API_CONFIG, TARGET_URL, } = config;
+const { GSHEETS_API_CONFIG, } = config;
 const { initialize, getResults, } = reddit;
 // const { initialize, getResults, } = realtor;
 // const { initialize, getResults, } = realtyTracValues;
@@ -67,9 +67,20 @@ const main1 = async () => {
   await googleSheetsApi( googleSheetsApiConfig, );
 };
 
+// url, selectors
+const TARGET_URL = 'https://old.reddit.com/r/node';
+const QUERY_SELECTOR_ALL = '#siteTable > div[class*="thing"]';
+const CONFIG_SELECTORS = [
+  //  propertyName     selector                     attribute
+  [ 'title'      , 'p.title'              , 'innerText' , ] ,
+  [ 'authorUrl'  , 'p.tagline > a.author' , 'href'      , ] ,
+  [ 'authorName' , 'p.tagline > a.author' , 'innerText' , ] ,
+  [ 'score'      , 'div.score.likes'      , 'innerText' , ] ,
+];
+
 const main = async () => {
   await initialize( TARGET_URL, );
-  const results = await getResults();
+  const results = await getResults( QUERY_SELECTOR_ALL, CONFIG_SELECTORS, );
   console.log('results\n', JSON.stringify( results, ));
   return results;
 };

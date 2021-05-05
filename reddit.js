@@ -5,28 +5,6 @@ const { USER_AGENT, WAIT, BROWSER, } = config;
 
 const MAX_COUNT = 6;
 
-// selectors
-const QUERY_SELECTOR_ALL = '#siteTable > div[class*="thing"]';
-const SELECTOR_TITLE       = 'p.title';
-// const SELECTOR_RANK        = 'p.rank';
-// const SELECTOR_POST_TIME   = 'p.tagline > time';
-const SELECTOR_AUTHOR_URL 
-   = SELECTOR_AUTHOR_NAME = 'p.tagline > a.author';
-const SELECTOR_SCORE       = 'div.score.likes';
-// const SELECTOR_COMMENTS    = 'a[data-event-action="comments"]';
-
-// attributes
-const HREF = 'href';
-const INNER_TEXT = 'innerText';
-
-const CONFIG_SELECTORS = [
-  // propertyName     selector                   attribute
-  [ 'title'      , SELECTOR_TITLE       , INNER_TEXT , ] ,
-  [ 'authorUrl'  , SELECTOR_AUTHOR_URL  , HREF       , ] ,
-  [ 'authorName' , SELECTOR_AUTHOR_NAME , INNER_TEXT , ] ,
-  [ 'score'      , SELECTOR_SCORE       , INNER_TEXT , ] ,
-];
-
 const self = {
   browser: null,
   pages: null,
@@ -43,8 +21,8 @@ const self = {
     await self.page.goto( targetUrl, WAIT, );
   },
 
-  getResults: async () => {
-    const elements = await self.page.$$( QUERY_SELECTOR_ALL, );
+  getResults: async ( querySelectorAll, configSelectors, ) => {
+    const elements = await self.page.$$( querySelectorAll, );
     let results = [];
     let counter = 0;
 
@@ -52,7 +30,7 @@ const self = {
       const result = {};
       // CONFIG_SELECTORS.forEach( async ([ propertyName, selector, attribute, ]) => { // fails
       // .forEach() throws, use regular for loop instead
-      for ( const [ propertyName, selector, attribute, ] of CONFIG_SELECTORS ) {
+      for ( const [ propertyName, selector, attribute, ] of configSelectors ) {
         result[ propertyName ] = await element.$eval (
           selector,
           ( node, attribute, ) => node[ attribute ].trim(),

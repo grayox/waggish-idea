@@ -114,7 +114,7 @@ const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 // ---------------- [ END ] options for anonymous scraping compliance ----------------
 
 // reddit
-const TARGET_URL = 'https://old.reddit.com/r/node';
+// const TARGET_URL = 'https://old.reddit.com/r/node';
 
 // // realtor
 // // const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/York_NE/N-York-Ave/';
@@ -156,7 +156,7 @@ exports.WAIT = WAIT;
 exports.SYMBOLS = SYMBOLS;
 exports.BROWSER = BROWSER;
 exports.USER_AGENT = USER_AGENT;
-exports.TARGET_URL = TARGET_URL;
+// exports.TARGET_URL = TARGET_URL;
 exports.GSHEETS_API_CONFIG = GSHEETS_API_CONFIG;
 
 exports.slowMo = slowMo;
