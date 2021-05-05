@@ -23,14 +23,16 @@
 
 // imports
 const config  = require( './config'  );
-const reddit  = require( './reddit'  );
+const scraper = require( './scraper'  );
+// const reddit  = require( './reddit'  );
 // const realtor = require( './realtor' );
 // const realtyTracValues = require( './realtyTracValues' );
 const google = require( './googleSheetsApi' );
 
 // destructured assignments
 const { GSHEETS_API_CONFIG, } = config;
-const { initialize, getResults, } = reddit;
+const { initialize, getResults, } = scraper;
+// const { initialize, getResults, } = reddit;
 // const { initialize, getResults, } = realtor;
 // const { initialize, getResults, } = realtyTracValues;
 const { googleSheetsApi, } = google;
@@ -62,7 +64,7 @@ const getCompute = async incomingDataGrid => {
   return newDataGrid;
 }
 
-const main1 = async () => {
+const main = async () => {
   const googleSheetsApiConfig = await { ...GSHEETS_API_CONFIG, getCompute, };
   await googleSheetsApi( googleSheetsApiConfig, );
 };
@@ -77,8 +79,9 @@ const CONFIG_SELECTORS = [
   [ 'authorName' , 'p.tagline > a.author' , 'innerText' , ] ,
   [ 'score'      , 'div.score.likes'      , 'innerText' , ] ,
 ];
+const CELL_CONTENT = ["https://old.reddit.com/r/node","#siteTable > div[class*=\"thing\"]",["title","p.title","innerText"],["authorUrl","p.tagline > a.author","href"],["authorName","p.tagline > a.author","innerText"],["score","div.score.likes","innerText"]]
 
-const main = async () => {
+const main1 = async () => {
   await initialize( TARGET_URL, );
   const results = await getResults( QUERY_SELECTOR_ALL, CONFIG_SELECTORS, );
   console.log('results\n', JSON.stringify( results, ));

@@ -129,7 +129,8 @@ const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 
 // [ BEGIN ] google sheets api
 
-const SHEET_NAME = 'Realtor';
+// const SHEET_NAME = 'Realtor';
+const SHEET_NAME = 'API';
 // const SPREADSHEET_ID = '1YZGTMnYCqYy-tINIambbwksL5mGO1itpYXjzNH_ZawM'; // test
 const SPREADSHEET_ID = '17UYEPxffvgel8TaEvGwxz7RhJUHviDvY6R95YE1cSAo'; // api incoming
 const GSHEETS_API_CONFIG = {
