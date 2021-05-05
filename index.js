@@ -23,15 +23,15 @@
 
 // imports
 const config  = require( './config'  );
-// const reddit  = require( './reddit'  );
-const realtor = require( './realtor' );
+const reddit  = require( './reddit'  );
+// const realtor = require( './realtor' );
 // const realtyTracValues = require( './realtyTracValues' );
 const google = require( './googleSheetsApi' );
 
 // destructured assignments
-const { GSHEETS_API_CONFIG, } = config;
-// const { initialize, getResults, } = reddit;
-const { initialize, getResults, } = realtor;
+const { GSHEETS_API_CONFIG, TARGET_URL, } = config;
+const { initialize, getResults, } = reddit;
+// const { initialize, getResults, } = realtor;
 // const { initialize, getResults, } = realtyTracValues;
 const { googleSheetsApi, } = google;
 
@@ -49,8 +49,6 @@ const getCompute = async incomingDataGrid => {
     return false;
   }
 
-  // debugger;
-
   // scrape page at incoming url for data
   await initialize( targetUrl, );
   const results = await getResults();
@@ -61,13 +59,19 @@ const getCompute = async incomingDataGrid => {
   // with value equal to a stringified JSON object written to the cell
   const cellContent = JSON.stringify( results, );
   const newDataGrid = [[ cellContent, ]];
-  // debugger;
   return newDataGrid;
 }
 
-const main = async () => {
+const main1 = async () => {
   const googleSheetsApiConfig = await { ...GSHEETS_API_CONFIG, getCompute, };
   await googleSheetsApi( googleSheetsApiConfig, );
+};
+
+const main = async () => {
+  await initialize( TARGET_URL, );
+  const results = await getResults();
+  console.log('results\n', JSON.stringify( results, ));
+  return results;
 };
 
 main();

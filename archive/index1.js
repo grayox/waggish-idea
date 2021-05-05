@@ -49,8 +49,6 @@ const getCompute = async incomingDataGrid => {
     return false;
   }
 
-  // debugger;
-
   // scrape page at incoming url for data
   await initialize( targetUrl, );
   const results = await getResults();
@@ -61,7 +59,6 @@ const getCompute = async incomingDataGrid => {
   // with value equal to a stringified JSON object written to the cell
   const cellContent = JSON.stringify( results, );
   const newDataGrid = [[ cellContent, ]];
-  // debugger;
   return newDataGrid;
 }
 

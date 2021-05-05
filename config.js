@@ -55,6 +55,7 @@ const BROWSER = {
     // '--proxy-server=socks5://127.0.0.1:1337', // https://stackoverflow.com/a/50233814
     // '--proxy-server=socks5://127.0.0.1:9050', // https://stackoverflow.com/a/50233814
     // '--proxy-server=socks4://96.9.77.192:55796', // https://dev.to/sonyarianto/practical-puppeteer-using-proxy-to-browse-a-page-1m82
+    // heroku: @see https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-on-heroku
     '--no-sandbox', '--start-maximized', '--disable-setuid-sandbox',
     '--disable-div-shm-usage', '--disable-gpu',
 
@@ -110,11 +111,10 @@ const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36
 //   "url": "https://httpbin.org/anything"
 // }
 
-
 // ---------------- [ END ] options for anonymous scraping compliance ----------------
 
-// // reddit
-// const TARGET_URL = 'https://old.reddit.com/r/node';
+// reddit
+const TARGET_URL = 'https://old.reddit.com/r/node';
 
 // // realtor
 // // const TARGET_URL = 'https://www.realtor.com/propertyrecord-search/York_NE/N-York-Ave/';
@@ -156,7 +156,7 @@ exports.WAIT = WAIT;
 exports.SYMBOLS = SYMBOLS;
 exports.BROWSER = BROWSER;
 exports.USER_AGENT = USER_AGENT;
-// exports.TARGET_URL = TARGET_URL;
+exports.TARGET_URL = TARGET_URL;
 exports.GSHEETS_API_CONFIG = GSHEETS_API_CONFIG;
 
 exports.slowMo = slowMo;

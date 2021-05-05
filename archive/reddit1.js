@@ -15,17 +15,6 @@ const SELECTOR_AUTHOR_URL
 const SELECTOR_SCORE       = 'div.score.likes';
 // const SELECTOR_COMMENTS    = 'a[data-event-action="comments"]';
 
-// attributes
-const HREF = 'href';
-const INNER_TEXT = 'innerText';
-
-const CONFIG_SELECTORS = [
-  // propertyName     selector                   attribute
-  [ 'title'      , SELECTOR_TITLE       , INNER_TEXT , ] ,
-  [ 'authorUrl'  , SELECTOR_AUTHOR_URL  , HREF       , ] ,
-  [ 'authorName' , SELECTOR_AUTHOR_NAME , INNER_TEXT , ] ,
-  [ 'score'      , SELECTOR_SCORE       , INNER_TEXT , ] ,
-];
 
 const self = {
   browser: null,
@@ -49,17 +38,24 @@ const self = {
     let counter = 0;
 
     for ( const element of elements ) {
-      const result = {};
-      // CONFIG_SELECTORS.forEach( async ([ propertyName, selector, attribute, ]) => { // fails
-      // .forEach() throws, use regular for loop instead
-      for ( const [ propertyName, selector, attribute, ] of CONFIG_SELECTORS ) {
-        result[ propertyName ] = await element.$eval (
-          selector,
-          ( node, attribute, ) => node[ attribute ].trim(),
-          attribute,
-        );
+      
+      const title      = await element.$eval( SELECTOR_TITLE       , node => node.innerText.trim());
+      // const rank       = await element.$eval( SELECTOR_RANK        , node => node.innerText.trim());
+      // const postTime   = await element.$eval( SELECTOR_POST_TIME   , node => node.innerText.trim());
+      const authorUrl  = await element.$eval( SELECTOR_AUTHOR_URL  , node => node.href     .trim());
+      const authorName = await element.$eval( SELECTOR_AUTHOR_NAME , node => node.innerText.trim());
+      const score      = await element.$eval( SELECTOR_SCORE       , node => node.innerText.trim());
+      // const comments   = await element.$eval( SELECTOR_COMMENTS    , node => node.innerText.trim());
+
+      // console.log( title, authorUrl, authorName, score, );
+
+      const result = {
+        // rank, postTime, comments,
+        title, authorUrl, authorName, score,
       };
+      
       results.push( result, );
+
       if( counter++ > MAX_COUNT ) break;
     }
     

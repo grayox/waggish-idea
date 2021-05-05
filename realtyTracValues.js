@@ -33,7 +33,6 @@ const self = {
   },
 
   getResults: async () => {
-    // debugger;
     const elements = await self.page.$$( QUERY_SELECTOR_ALL, );
     
     let results = [];
