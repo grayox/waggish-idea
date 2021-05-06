@@ -31,6 +31,7 @@ const google = require( './googleSheetsApi' );
 
 const REGEX_WHITESPACE = /\s/;
 const WHITESPACE_SINGLE = ' ';
+const timestamp = new Date();
 
 // destructured assignments
 const { GSHEETS_API_CONFIG, } = config;
@@ -57,7 +58,7 @@ const getCompute = async incomingDataGrid => {
 
   // deconstruct configApi
   const {
-    returnCode, targetUrl, querySelectorAll, configSelectors,
+    orderId, targetUrl, querySelectorAll, configSelectors,
   } = JSON.parse( configApi, );
   
   // scrape page at incoming url for data
@@ -68,7 +69,7 @@ const getCompute = async incomingDataGrid => {
 
   // convert results to a 2D array with 1 row and 1 column
   // with value equal to a stringified JSON object written to the cell
-  const newCellObject = { results, returnCode, };
+  const newCellObject = { results, orderId, timestamp, };
   const newCellContent = JSON.stringify( newCellObject, );
   const newDataGrid = [[ newCellContent, ]];
   return newDataGrid;
@@ -84,7 +85,7 @@ main();
 // // [ BEGIN ] testing notes
 
 // // working spreadsheet content
-// // {"returnCode":"foo","targetUrl":"https://old.reddit.com/r/node","querySelectorAll":"#siteTable > div[class*=\"thing\"]","configSelectors":[["title","p.title","innerText"],["authorUrl","p.tagline > a.author","href"],["authorName","p.tagline > a.author","innerText"],["score","div.score.likes","innerText"]]}
+// // {"orderId":"foo","targetUrl":"https://old.reddit.com/r/node","querySelectorAll":"#siteTable > div[class*=\"thing\"]","configSelectors":[["title","p.title","innerText"],["authorUrl","p.tagline > a.author","href"],["authorName","p.tagline > a.author","innerText"],["score","div.score.likes","innerText"]]}
 
 // // url, selectors
 // const TARGET_URL = 'https://old.reddit.com/r/node';
