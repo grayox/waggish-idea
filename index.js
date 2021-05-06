@@ -29,6 +29,9 @@ const scraper = require( './scraper'  );
 // const realtyTracValues = require( './realtyTracValues' );
 const google = require( './googleSheetsApi' );
 
+const REGEX_WHITESPACE = /\s/;
+const WHITESPACE_SINGLE = ' ';
+
 // destructured assignments
 const { GSHEETS_API_CONFIG, } = config;
 const { initialize, getResults, } = scraper;
@@ -42,25 +45,32 @@ const getCompute = async incomingDataGrid => {
   const SKIP_NOTICE = 'Latest result cell is still populated';
 
   // de-structure incoming data grid
-  const [[ targetUrl, latestResult, ],] = incomingDataGrid;
+  let [[ configApi, latestResult, ],] = incomingDataGrid;
+  configApi = configApi.split( REGEX_WHITESPACE, ).join( WHITESPACE_SINGLE, );
 
   // skip if latest result cell is not empty
   const isHasLatestResult = latestResult && latestResult.length;
   if( isHasLatestResult ) {
-    Logger.log( SKIP_NOTICE, );
+    console.log( SKIP_NOTICE, );
     return false;
   }
 
+  // deconstruct configApi
+  const {
+    returnCode, targetUrl, querySelectorAll, configSelectors,
+  } = JSON.parse( configApi, );
+  
   // scrape page at incoming url for data
   await initialize( targetUrl, );
-  const results = await getResults();
+  const results = await getResults( querySelectorAll, configSelectors, );
   // console.log('results\n', JSON.stringify( results, ));
   // return results;
 
   // convert results to a 2D array with 1 row and 1 column
   // with value equal to a stringified JSON object written to the cell
-  const cellContent = JSON.stringify( results, );
-  const newDataGrid = [[ cellContent, ]];
+  const newCellObject = { results, returnCode, };
+  const newCellContent = JSON.stringify( newCellObject, );
+  const newDataGrid = [[ newCellContent, ]];
   return newDataGrid;
 }
 
@@ -69,23 +79,29 @@ const main = async () => {
   await googleSheetsApi( googleSheetsApiConfig, );
 };
 
-// url, selectors
-const TARGET_URL = 'https://old.reddit.com/r/node';
-const QUERY_SELECTOR_ALL = '#siteTable > div[class*="thing"]';
-const CONFIG_SELECTORS = [
-  //  propertyName     selector                     attribute
-  [ 'title'      , 'p.title'              , 'innerText' , ] ,
-  [ 'authorUrl'  , 'p.tagline > a.author' , 'href'      , ] ,
-  [ 'authorName' , 'p.tagline > a.author' , 'innerText' , ] ,
-  [ 'score'      , 'div.score.likes'      , 'innerText' , ] ,
-];
-const CELL_CONTENT = ["https://old.reddit.com/r/node","#siteTable > div[class*=\"thing\"]",["title","p.title","innerText"],["authorUrl","p.tagline > a.author","href"],["authorName","p.tagline > a.author","innerText"],["score","div.score.likes","innerText"]]
-
-const main1 = async () => {
-  await initialize( TARGET_URL, );
-  const results = await getResults( QUERY_SELECTOR_ALL, CONFIG_SELECTORS, );
-  console.log('results\n', JSON.stringify( results, ));
-  return results;
-};
-
 main();
+
+// // [ BEGIN ] testing notes
+
+// // working spreadsheet content
+// // {"returnCode":"foo","targetUrl":"https://old.reddit.com/r/node","querySelectorAll":"#siteTable > div[class*=\"thing\"]","configSelectors":[["title","p.title","innerText"],["authorUrl","p.tagline > a.author","href"],["authorName","p.tagline > a.author","innerText"],["score","div.score.likes","innerText"]]}
+
+// // url, selectors
+// const TARGET_URL = 'https://old.reddit.com/r/node';
+// const QUERY_SELECTOR_ALL = '#siteTable > div[class*="thing"]';
+// const CONFIG_SELECTORS = [
+//   //  propertyName     selector                     attribute
+//   [ 'title'      , 'p.title'              , 'innerText' , ] ,
+//   [ 'authorUrl'  , 'p.tagline > a.author' , 'href'      , ] ,
+//   [ 'authorName' , 'p.tagline > a.author' , 'innerText' , ] ,
+//   [ 'score'      , 'div.score.likes'      , 'innerText' , ] ,
+// ];
+
+// const main1 = async () => {
+//   await initialize( TARGET_URL, );
+//   const results = await getResults( QUERY_SELECTOR_ALL, CONFIG_SELECTORS, );
+//   console.log('results\n', JSON.stringify( results, ));
+//   return results;
+// };
+
+// // [ END ] testing notes

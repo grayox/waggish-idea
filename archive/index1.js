@@ -45,7 +45,7 @@ const getCompute = async incomingDataGrid => {
   // skip if latest result cell is not empty
   const isHasLatestResult = latestResult && latestResult.length;
   if( isHasLatestResult ) {
-    Logger.log( SKIP_NOTICE, );
+    console.log( SKIP_NOTICE, );
     return false;
   }
 

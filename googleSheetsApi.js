@@ -98,8 +98,7 @@ const setGoogleSheetsApi = async config => {
   
   // fetch old data
   const originalDataGrid = await getGsRead( gsApi, readSsid, readSheetName, readRange, );
-  return originalDataGrid;
-
+  
   // compute new data
   const newDataGrid = await getCompute( originalDataGrid, );
   
