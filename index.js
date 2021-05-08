@@ -43,20 +43,20 @@ const { googleSheetsApi, } = google;
 
 // scraping function
 const getCompute = async incomingDataGrid => {
-  const SKIP_NOTICE = 'Latest result cell is still populated';
+  const SKIP_NOTICE = 'Latest result cell is still populated. Terminating now.';
 
   // de-structure incoming data grid
   let [[ configApi, latestResult, ],] = incomingDataGrid;
-  configApi = configApi.split( REGEX_WHITESPACE, ).join( WHITESPACE_SINGLE, );
 
   // skip if latest result cell is not empty
   const isHasLatestResult = latestResult && latestResult.length;
   if( isHasLatestResult ) {
     console.log( SKIP_NOTICE, );
-    return false;
+    return;
   }
-
+  
   // deconstruct configApi
+  configApi = configApi.split( REGEX_WHITESPACE, ).join( WHITESPACE_SINGLE, );
   const {
     orderId, targetUrl, querySelectorAll, configSelectors, maxCountLimit,
   } = JSON.parse( configApi, );
@@ -75,12 +75,8 @@ const getCompute = async incomingDataGrid => {
   return newDataGrid;
 }
 
-const main = async () => {
-  const googleSheetsApiConfig = await { ...GSHEETS_API_CONFIG, getCompute, };
-  await googleSheetsApi( googleSheetsApiConfig, );
-};
-
-main();
+( async () => await googleSheetsApi({ ...GSHEETS_API_CONFIG, getCompute, },))()
+  .catch( e => console.log( e.message ));
 
 // // [ BEGIN ] testing notes
 

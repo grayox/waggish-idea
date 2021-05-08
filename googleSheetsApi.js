@@ -24,7 +24,6 @@ const VERSION = 'v4';
 const CLIENT_API_LIST = [ 'https://www.googleapis.com/auth/spreadsheets', ];
 
 const BANG = '!';
-const WHITESPACE_ZERO = '';
 
 const getSpreadsheetRange = ( sheetName, sheetRange, ) =>
   [ sheetName, sheetRange, ].join( BANG, );
@@ -67,7 +66,7 @@ const getGsRead = async ( gsApi, spreadsheetId, sheetName, sheetRange, ) => {
   const options = { spreadsheetId, range, };
   const dataRangeImport = await gsApi.spreadsheets.values.get( options, );
   const dataGrid = dataRangeImport && dataRangeImport.data && dataRangeImport.data.values;
-  console.log( dataGrid, );
+  console.log(`Successfully fetched spreadsheet data and saw: ${ dataGrid }`, );
   return dataGrid;
 }
 

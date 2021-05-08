@@ -29,8 +29,7 @@ const self = {
 
       // CONFIG_SELECTORS.forEach( async ([ propertyName, selector, attribute, ]) => { // fails
       // .forEach() throws, use regular for loop instead
-      for ( const [ propertyName, selector, attribute, ] of configSelectors ) {
-        
+      for ( const [ propertyName, selector, attribute, ] of configSelectors ) {      
         try {
           result[ propertyName ] = 
             selector
@@ -44,18 +43,22 @@ const self = {
             //   }, now, 'foo');
             await element.$eval (
               selector,
-              ( node, attribute, ) => node[ attribute ].trim(),
+              ( node, attribute, ) =>
+                ( node[ attribute ] && node[ attribute ].trim() )
+                || node.getAttribute( attribute, ),
               attribute, // ...additional args
             )
             :
             // select the element handle as reference
             // @see https://stackoverflow.com/a/52829150
             await self.page.evaluate (
-              ( node, attribute, ) => node[ attribute ].trim(),
+              ( node, attribute, ) =>
+                ( node[ attribute ] && node[ attribute ].trim() )
+                || node.getAttribute( attribute, ),
               element, attribute, // ...additional args
             );  
         } catch ( error ) {
-          console.log( error );
+          console.log( error.message, );
         }
       };
       results.push( result, );
