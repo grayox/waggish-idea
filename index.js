@@ -58,12 +58,12 @@ const getCompute = async incomingDataGrid => {
 
   // deconstruct configApi
   const {
-    orderId, targetUrl, querySelectorAll, configSelectors,
+    orderId, targetUrl, querySelectorAll, configSelectors, maxCountLimit,
   } = JSON.parse( configApi, );
   
   // scrape page at incoming url for data
   await initialize( targetUrl, );
-  const results = await getResults( querySelectorAll, configSelectors, );
+  const results = await getResults( querySelectorAll, configSelectors, maxCountLimit, );
   // console.log('results\n', JSON.stringify( results, ));
   // return results;
 

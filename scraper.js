@@ -3,8 +3,6 @@ const puppeteer = require( 'puppeteer' ); // @see https://github.com/puppeteer/p
 
 const { USER_AGENT, WAIT, BROWSER, } = config;
 
-const MAX_COUNT = 6;
-
 const self = {
   browser: null,
   pages: null,
@@ -21,24 +19,50 @@ const self = {
     await self.page.goto( targetUrl, WAIT, );
   },
 
-  getResults: async ( querySelectorAll, configSelectors, ) => {
+  getResults: async ( querySelectorAll, configSelectors, maxCountLimit, ) => {
     const elements = await self.page.$$( querySelectorAll, );
     let results = [];
-    let counter = 0;
-
+    let counter = 1;
+    
     for ( const element of elements ) {
       const result = {};
+
       // CONFIG_SELECTORS.forEach( async ([ propertyName, selector, attribute, ]) => { // fails
       // .forEach() throws, use regular for loop instead
       for ( const [ propertyName, selector, attribute, ] of configSelectors ) {
-        result[ propertyName ] = await element.$eval (
-          selector,
-          ( node, attribute, ) => node[ attribute ].trim(),
-          attribute,
-        );
+        
+        try {
+          result[ propertyName ] = 
+            selector
+            ?
+            // @see https://stackoverflow.com/a/59899999
+            // how to pass arguments to .$eval()
+            //   const now = moment().format('YYYY-MM-D');
+            //   await page.$eval('#middleContent_txtEndDate', (el, now, foo) => {
+            //      console.log(el, now, foo);
+            //      return el.value = now;
+            //   }, now, 'foo');
+            await element.$eval (
+              selector,
+              ( node, attribute, ) => node[ attribute ].trim(),
+              attribute, // ...additional args
+            )
+            :
+            // select the element handle as reference
+            // @see https://stackoverflow.com/a/52829150
+            await self.page.evaluate (
+              ( node, attribute, ) => node[ attribute ].trim(),
+              element, attribute, // ...additional args
+            );  
+        } catch ( error ) {
+          console.log( error );
+        }
       };
       results.push( result, );
-      if( counter++ > MAX_COUNT ) break;
+
+      // limit number of results per page, if necessary
+      if( !maxCountLimit ) continue;
+      if( ++counter > maxCountLimit ) break;
     }
     
     // cleanup
