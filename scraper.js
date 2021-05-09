@@ -1,7 +1,7 @@
 const config    = require( './config'  );
 const puppeteer = require( 'puppeteer' ); // @see https://github.com/puppeteer/puppeteer
 
-const { USER_AGENT, WAIT, BROWSER, } = config;
+const { userAgent, WAIT, BROWSER, } = config;  // USER_AGENT,
 
 const self = {
   browser: null,
@@ -13,7 +13,7 @@ const self = {
     self.page = await self.browser.newPage();
 
     // set user-agent
-    await self.page.setUserAgent( USER_AGENT, );
+    await self.page.setUserAgent( userAgent, ); // USER_AGENT,
     
     // navigate to target
     await self.page.goto( targetUrl, WAIT, );

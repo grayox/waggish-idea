@@ -1,3 +1,5 @@
+const UserAgent = require( 'user-agents' );
+
 // params
 const SYMBOLS = {
   PIPE: '|',
@@ -69,7 +71,10 @@ const WAIT = {
   // waitForNavigation: // ... is a property alternative to waitUntil
 };
 
-const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36';
+// const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36';
+const userAgentObject = new UserAgent();
+const userAgent = userAgentObject.toString();
+console.log(`userAgent: ${ userAgent }`);
 
 // ---------------- [ BEGIN ] options for anonymous scraping compliance ----------------
 //                             ( @comment out for testing )
@@ -156,10 +161,11 @@ const GSHEETS_API_CONFIG = {
 exports.WAIT = WAIT;
 exports.SYMBOLS = SYMBOLS;
 exports.BROWSER = BROWSER;
-exports.USER_AGENT = USER_AGENT;
-// exports.TARGET_URL = TARGET_URL;
 exports.GSHEETS_API_CONFIG = GSHEETS_API_CONFIG;
+// exports.TARGET_URL = TARGET_URL;
+// exports.USER_AGENT = USER_AGENT;
 
 exports.slowMo = slowMo;
 exports.setDelay = setDelay;
+exports.userAgent = userAgent;
 // [ END ] exports

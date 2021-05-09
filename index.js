@@ -43,7 +43,7 @@ const { googleSheetsApi, } = google;
 
 // scraping function
 const getCompute = async incomingDataGrid => {
-  const SKIP_NOTICE = 'Latest result cell is still populated. Terminating now.';
+  const TERMINATE_NOTICE = 'Latest result cell is still populated. Will not overwrite. Terminating now.';
 
   // de-structure incoming data grid
   let [[ configApi, latestResult, ],] = incomingDataGrid;
@@ -51,7 +51,7 @@ const getCompute = async incomingDataGrid => {
   // skip if latest result cell is not empty
   const isHasLatestResult = latestResult && latestResult.length;
   if( isHasLatestResult ) {
-    console.log( SKIP_NOTICE, );
+    console.log( TERMINATE_NOTICE, );
     return;
   }
   
