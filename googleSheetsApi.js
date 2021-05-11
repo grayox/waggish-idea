@@ -38,7 +38,7 @@ const getGsClient = async () => {
   );
 
   await gsClient.authorize(( error, tokens, ) => {
-    const CONNECTED_MESSAGE = 'Connected!';
+    const CONNECTED_MESSAGE = 'Connected to Google Sheets API!';
     const message = error || CONNECTED_MESSAGE;
     console.log( message, );
   });
@@ -66,7 +66,7 @@ const getGsRead = async ( gsApi, spreadsheetId, sheetName, sheetRange, ) => {
   const options = { spreadsheetId, range, };
   const dataRangeImport = await gsApi.spreadsheets.values.get( options, );
   const dataGrid = dataRangeImport && dataRangeImport.data && dataRangeImport.data.values;
-  console.log(`Successfully fetched spreadsheet data and saw: ${ dataGrid }`, );
+  console.log(`Successfully imported Google Sheets data and saw: ${ dataGrid }`, );
   return dataGrid;
 }
 

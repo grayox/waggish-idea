@@ -58,12 +58,13 @@ const getCompute = async incomingDataGrid => {
   // deconstruct configApi
   configApi = configApi.split( REGEX_WHITESPACE, ).join( WHITESPACE_SINGLE, );
   const {
-    orderId, targetUrl, querySelectorAll, configSelectors, maxCountLimit,
+    orderId, targetUrl, payload, querySelectorAll, configSelectors, maxCountLimit,
   } = JSON.parse( configApi, );
   
   // scrape page at incoming url for data
-  await initialize( targetUrl, );
-  const results = await getResults( querySelectorAll, configSelectors, maxCountLimit, );
+  const results = await initialize( targetUrl, payload, ) // returns json object from POST
+    || await getResults( querySelectorAll, configSelectors, maxCountLimit, ); // process GET
+  // // testing
   // console.log('results\n', JSON.stringify( results, ));
   // return results;
 

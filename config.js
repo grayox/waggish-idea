@@ -49,6 +49,8 @@ const BROWSER = {
   product, // 'chrome' | 'firefox'
   headless: false, // devtools: true,
 
+  ignoreHTTPSErrors: true, // POST requests per https://stackoverflow.com/a/59173601
+
   // anonymous
   // https://www.youtube.com/watch?v=biWUZAlTnkg | https://www.youtube.com/watch?v=RhzGVhLCiK0
   userDataDir: './cache',
@@ -60,6 +62,8 @@ const BROWSER = {
     // heroku: @see https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-on-heroku
     '--no-sandbox', '--start-maximized', '--disable-setuid-sandbox',
     '--disable-div-shm-usage', '--disable-gpu',
+
+    '--enable-features=NetworkService', // POST requests per https://stackoverflow.com/a/59173601
 
     // google search: public proxy servers
     // blacklist lookup: https://whatismyipaddress.com/blacklist-check

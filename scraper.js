@@ -3,23 +3,100 @@ const puppeteer = require( 'puppeteer' ); // @see https://github.com/puppeteer/p
 
 const { userAgent, WAIT, BROWSER, } = config;  // USER_AGENT,
 
+const REQUEST = 'request';
+const POST = 'POST';
+const CONTENT_TYPE = 'Content-Type';
+const APPLICATION_JSON = 'application/json';
+const APPLICATION_ENCODED = 'application/x-www-form-urlencoded';
+const STATUS_CODE_SUCCESS = 200;
+
 const self = {
   browser: null,
   pages: null,
 
   // setup
-  initialize: async targetUrl => {
+  /**
+   * can handle http GET and POST requests
+   * @see https://stackoverflow.com/a/49385769
+   * @param { String } targetUrl the intended endpoint
+   * @param { Object } [ payload = false ] for HTTP POST requests
+   */
+  initialize: async ( targetUrl, payload = false, ) => {
     self.browser = await puppeteer.launch( BROWSER, );
     self.page = await self.browser.newPage();
 
     // set user-agent
     await self.page.setUserAgent( userAgent, ); // USER_AGENT,
     
+    // http POST
+    // conditioned on payload existing  
+    const handleSetPostDataPayload = async () => {
+      if( !payload ) return;
+
+      // Allows you to intercept a request; must appear before
+      // your first page.goto()
+      await self.page.setRequestInterception( true, );
+
+      // Request intercept handler... will be triggered with
+      // each page.goto() statement
+      await self.page.once( REQUEST, interceptedRequest => {
+        
+        // change request method and add post data
+        const data = {
+          method: POST,
+          postData: JSON.stringify( payload, ),
+          // postData: 'foo=FOO&bar=BAR', // { foo: 'FOO', bar: 'BAR', },
+          headers: {
+            ...interceptedRequest.headers(),
+            [ CONTENT_TYPE ]: APPLICATION_JSON, // APPLICATION_ENCODED, // 
+          },
+        };
+        // Request modified... finish sending!
+        interceptedRequest.continue( data, );
+      },);
+    };
+
+    await handleSetPostDataPayload();
+    
     // navigate to target
-    await self.page.goto( targetUrl, WAIT, );
+    const response = await self.page.goto( targetUrl, WAIT, );
+
+    // if this is not a POST request, then return to process
+    // the GET request normally with the prescribed scraping
+    if( !payload ) {
+      await self.browser.close(); // cleanup
+      return;
+    }
+
+    // console.log({
+    //   url: response.url(),
+    //   statusCode: response.status(),
+    //   body: await response.text(),
+    // });
+    
+    // otherwise return false if not successful...
+    const statusCode = await response.status();
+    const isResponseSuccess = statusCode === STATUS_CODE_SUCCESS;
+    if( !isResponseSuccess ) {
+      await self.browser.close(); // cleanup
+      return false;
+    }
+    
+    // ...or, if successful, return the JSON object
+    const jsonBodyAsString = await response.text();
+    const jsonObject = JSON.parse( jsonBodyAsString, );
+    await self.browser.close(); // cleanup
+    return jsonObject;
   },
 
-  getResults: async ( querySelectorAll, configSelectors, maxCountLimit, ) => {
+  getResults: async ( querySelectorAll, configSelectors, maxCountLimit, payload, ) => {
+    // handle post
+    if( payload ) {
+      console.log(`post request payload: ${ payload }`);
+      return;
+    }
+
+
     const elements = await self.page.$$( querySelectorAll, );
     let results = [];
     let counter = 1;
