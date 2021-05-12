@@ -7,7 +7,7 @@ const REQUEST = 'request';
 const POST = 'POST';
 const CONTENT_TYPE = 'Content-Type';
 const APPLICATION_JSON = 'application/json';
-const APPLICATION_ENCODED = 'application/x-www-form-urlencoded';
+// const APPLICATION_ENCODED = 'application/x-www-form-urlencoded';
 const STATUS_CODE_SUCCESS = 200;
 
 const self = {
@@ -28,7 +28,7 @@ const self = {
     // set user-agent
     await self.page.setUserAgent( userAgent, ); // USER_AGENT,
     
-    // http POST
+    // [ BEGIN ] POST
     // conditioned on payload existing  
     const handleSetPostDataPayload = async () => {
       if( !payload ) return;
@@ -57,10 +57,12 @@ const self = {
     };
 
     await handleSetPostDataPayload();
+    // [ END ] POST
     
     // navigate to target
     const response = await self.page.goto( targetUrl, WAIT, );
 
+    // GET
     // if this is not a POST request, then return to process
     // the GET request normally with the prescribed scraping
     if( !payload ) {
@@ -74,6 +76,7 @@ const self = {
     //   body: await response.text(),
     // });
     
+    // POST
     // otherwise return false if not successful...
     const statusCode = await response.status();
     const isResponseSuccess = statusCode === STATUS_CODE_SUCCESS;
@@ -82,6 +85,7 @@ const self = {
       return false;
     }
     
+    // POST
     // ...or, if successful, return the JSON object
     const jsonBodyAsString = await response.text();
     const jsonObject = JSON.parse( jsonBodyAsString, );
@@ -111,6 +115,7 @@ const self = {
           result[ propertyName ] = 
             selector
             ?
+            // typical node
             // @see https://stackoverflow.com/a/59899999
             // how to pass arguments to .$eval()
             //   const now = moment().format('YYYY-MM-D');
@@ -126,6 +131,7 @@ const self = {
               attribute, // ...additional args
             )
             :
+            // same node
             // select the element handle as reference
             // @see https://stackoverflow.com/a/52829150
             await self.page.evaluate (

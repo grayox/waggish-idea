@@ -30,7 +30,10 @@ const scraper = require( './scraper'  );
 const google = require( './googleSheetsApi' );
 
 const REGEX_WHITESPACE = /\s/;
+const WHITESPACE_ZERO = '';
 const WHITESPACE_SINGLE = ' ';
+const RANGE_START_STRING = 'A1:'
+const POST = 'POST';
 const timestamp = new Date();
 
 // destructured assignments
@@ -42,7 +45,7 @@ const { initialize, getResults, } = scraper;
 const { googleSheetsApi, } = google;
 
 // scraping function
-const getCompute = async incomingDataGrid => {
+const getCompute = async ( incomingDataGrid, writeSheetName, writeRange, writeSheetNamePost, ) => {
   const TERMINATE_NOTICE = 'Latest result cell is still populated. Will not overwrite. Terminating now.';
 
   // de-structure incoming data grid
@@ -62,8 +65,89 @@ const getCompute = async incomingDataGrid => {
   } = JSON.parse( configApi, );
   
   // scrape page at incoming url for data
-  const results = await initialize( targetUrl, payload, ) // returns json object from POST
-    || await getResults( querySelectorAll, configSelectors, maxCountLimit, ); // process GET
+  // let results = await initialize( targetUrl, payload, ) // returns json object from POST
+  // test
+  let results = [
+    { name: 'alice'   , age: 21 , } ,
+    { name: 'bob'     , age: 32 , } ,
+    { name: 'charlie' , age: 43 , } ,
+  ];
+  
+  // [ BEGIN ] handle http POST
+  if( results ){
+
+    /**
+     * @see http://bideowego.com/base-26-conversion
+     * @param { Number } numberInBase10 
+     * @returns { String }
+     */
+     const getConvertToBase26 = numberInBase10 => {
+      const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const ALPHABET_LENGTH = ALPHABET.length;
+      let result = WHITESPACE_ZERO;
+      if( numberInBase10 < 1 ) return result; // no letters for 0 or less
+      let remainder;
+      while( numberInBase10 !== 0 ){ // until we have a 0 quotient
+        let decremented = numberInBase10 - 1; // compensate for 0 based array
+        numberInBase10 = Math.floor( decremented / ALPHABET_LENGTH ); // divide by 26
+        remainder = decremented % ALPHABET_LENGTH; // get remainder
+        result = ALPHABET[ remainder ] + result; // prepend the letter at index of remainder
+      }
+      return result;
+    }
+    // const test_getConvertToBase26 = () => {
+    //   const CONFIG = [ 36, 57, 128, 269, ];
+    //   const result = CONFIG.map( numberInBase10 => getConvertToBase26( numberInBase10, ));
+    //   Logger.log('(line 363) result: %s', result, );
+    //   return result;
+    // }
+
+    const getWriteRangePost = dataGrid => {
+      const dataGridHeaderRow = dataGrid[ 0 ];
+      const dataGridHeaderRowLength = dataGridHeaderRow.length;
+      const dataGridLength = dataGrid.length;
+      const lastColumnLetters = getConvertToBase26( dataGridHeaderRowLength, );
+      const resultRange = [
+        RANGE_START_STRING, lastColumnLetters, dataGridLength,
+      ].join( WHITESPACE_ZERO, );
+      return resultRange;
+    }
+    
+    /**
+      * Inverse method for getArrayOfObjectsFromDataGrid()
+      * @param { String[] } headerRow must match the keys of each object
+      * @param { Object[] } arrayOfObjects
+      * @returns { *[][] }
+      */
+     const getDataGridFromArrayOfObjects = ( headerRow, arrayOfObjects, ) => {
+       const dataGrid = arrayOfObjects.map ( item =>
+         headerRow.map( headerLabel => item[ headerLabel ])
+       );
+       dataGrid.unshift( headerRow, );
+       return dataGrid;
+     }
+
+    const headerRowSet = new Set();
+    results.forEach( result => {
+      const keys = Object.keys( result, );
+      keys.forEach( key => headerRowSet.add( key, ));
+    });
+    const headerRow = [ ...headerRowSet, ];
+    const newDataGrid = getDataGridFromArrayOfObjects( headerRow, results, );
+
+    const writeRangePost = getWriteRangePost( newDataGrid, );
+
+    const out = [
+      [ newDataGrid , writeSheetNamePost , writeRangePost , ] ,
+      [ [[ POST, ]] , writeSheetName     , writeRange     , ] ,
+    ];
+    return out;
+  }
+  // [ END ] handle http POST
+
+  // [ BEGIN ] handle http GET
+  
+  results = await getResults( querySelectorAll, configSelectors, maxCountLimit, ); // process GET
   // // testing
   // console.log('results\n', JSON.stringify( results, ));
   // return results;
@@ -73,7 +157,9 @@ const getCompute = async incomingDataGrid => {
   const newCellObject = { results, orderId, timestamp, };
   const newCellContent = JSON.stringify( newCellObject, );
   const newDataGrid = [[ newCellContent, ]];
-  return newDataGrid;
+  const out = [[ newDataGrid, writeSheetName, writeRange, ]];
+  return out;
+  // [ END ] handle http GET
 }
 
 ( async () => await googleSheetsApi({ ...GSHEETS_API_CONFIG, getCompute, },))()

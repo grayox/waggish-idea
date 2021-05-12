@@ -76,8 +76,6 @@ const getGsRead = async ( gsApi, spreadsheetId, sheetName, sheetRange, ) => {
  * @returns 
  */
 const setGsUpdate = async ( newDataGrid, gsApi, spreadsheetId, sheetName, sheetRange, ) => {
-  console.log( newDataGrid, );
-
   const range = getSpreadsheetRange( sheetName, sheetRange, );
   const options = {
     spreadsheetId, range,
@@ -85,13 +83,23 @@ const setGsUpdate = async ( newDataGrid, gsApi, spreadsheetId, sheetName, sheetR
     resource: { values: newDataGrid, },
   }
   const result = await gsApi.spreadsheets.values.update( options, );
+  
+  // log result
+  const newDataGridLength = newDataGrid.length;
+  const newRecordCount = newDataGridLength - 1;
+  const isPost = newDataGridLength > 0;
+  const dataGridReport = isPost ? `${ newRecordCount } new records` : newDataGrid;
+  debugger;
+  console.log( `Successfully wrote to spreadsheet: ${ dataGridReport }`, );
+
   return result;
 }
 
 const setGoogleSheetsApi = async config => {
-  const { read, write, getCompute, } = config;
+  const { read, write, post, getCompute, } = config;
   const { ssid: readSsid  , sheetName: readSheetName  , range: readRange  , } = read;
   const { ssid: writeSsid , sheetName: writeSheetName , range: writeRange , } = write;
+  const {                   sheetName: postSheetName  ,                     } = post;
 
   const gsApi = await getGsApi(); // get reference to google sheets api
   
@@ -99,13 +107,15 @@ const setGoogleSheetsApi = async config => {
   const originalDataGrid = await getGsRead( gsApi, readSsid, readSheetName, readRange, );
   
   // compute new data
-  const newDataGrid = await getCompute( originalDataGrid, );
+  const computed = await getCompute( originalDataGrid, writeSheetName, writeRange, postSheetName, );
   
   // update google sheets with new data
-  const result = await setGsUpdate( newDataGrid, gsApi, writeSsid, writeSheetName, writeRange, );
+  computed.forEach( async ([ newDataGrid, actualWriteSheetName, actualWriteRange, ]) => {
+    await setGsUpdate( newDataGrid, gsApi, writeSsid, actualWriteSheetName, actualWriteRange, );
+  });
   
-  // console.log( result, );
-  return result;
+  // console.log( computed, );
+  return computed;
 };
 
 // ------------------------ [ BEGIN ] test ------------------------

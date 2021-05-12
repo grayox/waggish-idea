@@ -142,6 +142,7 @@ const userAgent = userAgentObject.toString();
 const SHEET_NAME = 'API';
 // const SPREADSHEET_ID = '1YZGTMnYCqYy-tINIambbwksL5mGO1itpYXjzNH_ZawM'; // test
 const SPREADSHEET_ID = '17UYEPxffvgel8TaEvGwxz7RhJUHviDvY6R95YE1cSAo'; // api incoming
+const SHEET_NAME_HTTP_POST = 'Post';
 const GSHEETS_API_CONFIG = {
   // getCompute,
   read: {
@@ -154,6 +155,9 @@ const GSHEETS_API_CONFIG = {
     sheetName: SHEET_NAME,
     range: 'B1',
   },
+  post: {
+    sheetName: SHEET_NAME_HTTP_POST,
+  }
 }
 
 // [ END ] google sheets api
