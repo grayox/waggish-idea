@@ -87,9 +87,8 @@ const setGsUpdate = async ( newDataGrid, gsApi, spreadsheetId, sheetName, sheetR
   // log result
   const newDataGridLength = newDataGrid.length;
   const newRecordCount = newDataGridLength - 1;
-  const isPost = newDataGridLength > 0;
+  const isPost = newRecordCount > 0;
   const dataGridReport = isPost ? `${ newRecordCount } new records` : newDataGrid;
-  debugger;
   console.log( `Successfully wrote to spreadsheet: ${ dataGridReport }`, );
 
   return result;
