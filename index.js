@@ -137,9 +137,12 @@ const getCompute = async ( incomingDataGrid, writeSheetName, writeRange, writeSh
 
     const writeRangePost = getWriteRangePost( newDataGrid, );
 
+    const postReturnObject = { orderId, results: POST, };
+    const postReturnObjectStringified = JSON.stringify( postReturnObject, )
+    const postReturnGrid = [[ postReturnObjectStringified, ]];
     const out = [
-      [ newDataGrid , writeSheetNamePost , writeRangePost , ] ,
-      [ [[ POST, ]] , writeSheetName     , writeRange     , ] ,
+      [ newDataGrid    , writeSheetNamePost , writeRangePost , ] ,
+      [ postReturnGrid , writeSheetName     , writeRange     , ] ,
     ];
     return out;
   }
