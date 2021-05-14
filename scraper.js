@@ -61,15 +61,12 @@ const self = {
     
     // navigate to target
     const response = await self.page.goto( targetUrl, WAIT, );
-
+    
     // GET
     // if this is not a POST request, then return to process
     // the GET request normally with the prescribed scraping
-    if( !payload ) {
-      await self.browser.close(); // cleanup
-      return;
-    }
-
+    if( !payload ) return;
+    
     // console.log({
     //   url: response.url(),
     //   statusCode: response.status(),
@@ -94,13 +91,13 @@ const self = {
   },
 
   getResults: async ( querySelectorAll, configSelectors, maxCountLimit, payload, ) => {
-    // handle post
+    // handle POST
     if( payload ) {
       console.log(`post request payload: ${ payload }`);
       return;
     }
 
-
+    // handle GET
     const elements = await self.page.$$( querySelectorAll, );
     let results = [];
     let counter = 1;

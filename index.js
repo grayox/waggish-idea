@@ -65,13 +65,13 @@ const getCompute = async ( incomingDataGrid, writeSheetName, writeRange, writeSh
   } = JSON.parse( configApi, );
   
   // scrape page at incoming url for data
-  // let results = await initialize( targetUrl, payload, ) // returns json object from POST
-  // test
-  let results = [
-    { name: 'alice'   , age: 21 , } ,
-    { name: 'bob'     , age: 32 , } ,
-    { name: 'charlie' , age: 43 , } ,
-  ];
+  let results = await initialize( targetUrl, payload, ) // returns json object from POST
+  // // test
+  // let results = [
+  //   { name: 'alice'   , age: 21 , } ,
+  //   { name: 'bob'     , age: 32 , } ,
+  //   { name: 'charlie' , age: 43 , } ,
+  // ];
   
   // [ BEGIN ] handle http POST
   if( results ){
