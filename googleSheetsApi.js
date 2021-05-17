@@ -107,7 +107,9 @@ const setGoogleSheetsApi = async config => {
   
   // compute new data
   const computed = await getCompute( originalDataGrid, writeSheetName, writeRange, postSheetName, );
-  
+  const isComputed = computed && computed.length;
+  if( !isComputed ) return;
+
   // update google sheets with new data
   computed.forEach( async ([ newDataGrid, actualWriteSheetName, actualWriteRange, ]) => {
     await setGsUpdate( newDataGrid, gsApi, writeSsid, actualWriteSheetName, actualWriteRange, );
