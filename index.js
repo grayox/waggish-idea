@@ -28,6 +28,7 @@ const scraper = require( './scraper'  );
 // const realtor = require( './realtor' );
 // const realtyTracValues = require( './realtyTracValues' );
 const google = require( './googleSheetsApi' );
+const resultsImport = require ('./archive/tempdata-equator.json');
 
 const REGEX_WHITESPACE = /\s/;
 const WHITESPACE_ZERO = '';
@@ -65,13 +66,15 @@ const getCompute = async ( incomingDataGrid, writeSheetName, writeRange, writeSh
   } = JSON.parse( configApi, );
   
   // scrape page at incoming url for data
-  let results = await initialize( targetUrl, payload, ); // returns json object from POST
-  // // test
+  // let results = await initialize( targetUrl, payload, ); // returns json object from POST
+  // // test 1
   // let results = [
   //   { name: 'alice'   , age: 21 , } ,
   //   { name: 'bob'     , age: 32 , } ,
   //   { name: 'charlie' , age: 43 , } ,
   // ];
+  // test 2
+  let results = resultsImport;
   
   // [ BEGIN ] handle http POST
   if( results ){
@@ -133,6 +136,14 @@ const getCompute = async ( incomingDataGrid, writeSheetName, writeRange, writeSh
       keys.forEach( key => headerRowSet.add( key, ));
     });
     const headerRow = [ ...headerRowSet, ];
+
+    // stringify each property of each result for POST
+    results.forEach( result => {
+      headerRow.forEach( property =>
+        result[ property ] = JSON.stringify( result[ property ])
+      );
+    });
+
     const newDataGrid = getDataGridFromArrayOfObjects( headerRow, results, );
 
     const writeRangePost = getWriteRangePost( newDataGrid, );
