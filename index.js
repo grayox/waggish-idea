@@ -29,6 +29,7 @@ const scraper = require( './scraper'  );
 // const realtyTracValues = require( './realtyTracValues' );
 const google = require( './googleSheetsApi' );
 // const resultsImport = require ('./archive/tempdata-equator.json');
+const resultsImport = require ('./archive/tempdata-realtytrac-post-b.json');
 
 const REGEX_WHITESPACE = /\s/;
 const WHITESPACE_ZERO = '';
@@ -46,7 +47,9 @@ const { initialize, getResults, } = scraper;
 const { googleSheetsApi, } = google;
 
 // scraping function
-const getCompute = async ( incomingDataGrid, writeSheetName, writeRange, writeSheetNamePost, ) => {
+const getCompute = async (
+  incomingDataGrid, writeSheetName, writeRange, writeSheetNamePost, pathToData,
+) => {
   const TERMINATE_NOTICE = 'Latest result cell is still populated. Will not overwrite. Terminating now.';
 
   // de-structure incoming data grid
@@ -62,19 +65,25 @@ const getCompute = async ( incomingDataGrid, writeSheetName, writeRange, writeSh
   // deconstruct configApi
   configApi = configApi.split( REGEX_WHITESPACE, ).join( WHITESPACE_SINGLE, );
   const {
-    orderId, targetUrl, payload, querySelectorAll, configSelectors, maxCountLimit,
+    targetUrl, headers, payload, ajaxXhrUrl, pathToData,
+    orderId, querySelectorAll, configSelectors, maxCountLimit,
   } = JSON.parse( configApi, );
   
   // scrape page at incoming url for data
-  let results = await initialize( targetUrl, payload, ); // returns json object from POST
+  // let results = await initialize({ targetUrl, headers, payload, ajaxXhrUrl, pathToData, }); // returns json object from POST
   // // test 1
   // let results = [
   //   { name: 'alice'   , age: 21 , } ,
   //   { name: 'bob'     , age: 32 , } ,
   //   { name: 'charlie' , age: 43 , } ,
   // ];
-  // // test 2
-  // let results = resultsImport;
+  // test 2
+  let results = resultsImport;
+  // const pathToData = [ 'properties', ];
+
+  // extract the relevant data from the pathToData
+  const isPathToData = pathToData && pathToData.length;
+  if( isPathToData ) pathToData.forEach( property => results = results[ property ]);
   
   // [ BEGIN ] handle http POST
   if( results ){
@@ -130,6 +139,7 @@ const getCompute = async ( incomingDataGrid, writeSheetName, writeRange, writeSh
        return dataGrid;
      }
 
+    // get headers by searching all rows
     const headerRowSet = new Set();
     results.forEach( result => {
       const keys = Object.keys( result, );
@@ -161,7 +171,10 @@ const getCompute = async ( incomingDataGrid, writeSheetName, writeRange, writeSh
 
   // [ BEGIN ] handle http GET
   
-  results = await getResults( querySelectorAll, configSelectors, maxCountLimit, ); // process GET
+  // process GET
+  results = await getResults(
+    querySelectorAll, configSelectors, maxCountLimit, headers, payload,
+  );
   // // testing
   // console.log('results\n', JSON.stringify( results, ));
   // return results;

@@ -5,8 +5,8 @@ const { userAgent, WAIT, BROWSER, } = config;  // USER_AGENT,
 
 const REQUEST = 'request';
 const POST = 'POST';
-const CONTENT_TYPE = 'Content-Type';
-const APPLICATION_JSON = 'application/json';
+// const CONTENT_TYPE = 'Content-Type';
+// const APPLICATION_JSON = 'application/json';
 // const APPLICATION_ENCODED = 'application/x-www-form-urlencoded';
 const STATUS_CODE_SUCCESS = 200;
 
@@ -20,8 +20,19 @@ const self = {
    * @see https://stackoverflow.com/a/49385769
    * @param { String } targetUrl the intended endpoint
    * @param { Object } [ payload = false ] for HTTP POST requests
+   * @param { Object } [ headers = false ] for HTTP POST requests
+   * 
+   * @param { String } [ ajaxXhrUrl = false ] for listening for a specific response from a specific xhr resource
+   * @see https://github.com/puppeteer/puppeteer/blob/9ef4153f6e3548ac3fd2ac75b4570343e53e3a0a/docs/api.md#pagewaitforresponseurlorpredicate-options
+   * @see https://stackoverflow.com/a/57505637
+   * @see https://stackoverflow.com/a/56689657
+   * 
+   * @param { String[] } [ pathToData = false ] the path of properties and sub-properties that takes us to an array of items
+   * @example [ 'properties', ]
    */
-  initialize: async ( targetUrl, payload = false, ) => {
+  initialize: async ({
+    targetUrl, headers=false, payload=false, ajaxXhrUrl=false, pathToData=false,
+  }) => {
     self.browser = await puppeteer.launch( BROWSER, );
     self.page = await self.browser.newPage();
 
@@ -48,7 +59,8 @@ const self = {
           // postData: 'foo=FOO&bar=BAR', // { foo: 'FOO', bar: 'BAR', },
           headers: {
             ...interceptedRequest.headers(),
-            [ CONTENT_TYPE ]: APPLICATION_JSON, // APPLICATION_ENCODED, // 
+            // [ CONTENT_TYPE ]: APPLICATION_JSON, // APPLICATION_ENCODED, //
+            ...headers,
           },
         };
         // Request modified... finish sending!
@@ -61,6 +73,14 @@ const self = {
     
     // navigate to target
     const response = await self.page.goto( targetUrl, WAIT, );
+    
+    if( ajaxXhrUrl ){
+      // @see https://github.com/puppeteer/puppeteer/blob/9ef4153f6e3548ac3fd2ac75b4570343e53e3a0a/docs/api.md#pagewaitforresponseurlorpredicate-options
+      const firstResponse = await self.page.waitForResponse( ajaxXhrUrl, );
+      const firstResponseJson = await firstResponse.json();
+      console.log( firstResponseJson, );
+      return firstResponse;
+    }
     
     // GET
     // if this is not a POST request, then return to process
@@ -78,7 +98,7 @@ const self = {
     const statusCode = await response.status();
     const isResponseSuccess = statusCode === STATUS_CODE_SUCCESS;
     if( !isResponseSuccess ) {
-      await self.browser.close(); // cleanup
+      // await self.browser.close(); // cleanup
       return false;
     }
     
@@ -86,13 +106,14 @@ const self = {
     // ...or, if successful, return the JSON object
     const jsonBodyAsString = await response.text();
     const jsonObject = JSON.parse( jsonBodyAsString, );
-    await self.browser.close(); // cleanup
+    // await self.browser.close(); // cleanup
     return jsonObject;
   },
 
-  getResults: async ( querySelectorAll, configSelectors, maxCountLimit, payload, ) => {
+  getResults: async ( querySelectorAll, configSelectors, maxCountLimit, headers, payload, ) => {
     // handle POST
     if( payload ) {
+      console.log(`post request headers: ${ headers }`);
       console.log(`post request payload: ${ payload }`);
       return;
     }
@@ -149,7 +170,7 @@ const self = {
     }
     
     // cleanup
-    await self.browser.close();
+    // await self.browser.close();
 
     // console.log('(line 65) results\n', JSON.stringify( results, ));
     return results;
