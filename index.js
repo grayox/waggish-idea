@@ -29,7 +29,7 @@ const scraper = require( './scraper'  );
 // const realtyTracValues = require( './realtyTracValues' );
 const google = require( './googleSheetsApi' );
 // const resultsImport = require ('./archive/tempdata-equator.json');
-const resultsImport = require ('./archive/tempdata-realtytrac-post-b.json');
+// const resultsImport = require ('./archive/tempdata-realtytrac-post-b.json');
 
 const REGEX_WHITESPACE = /\s/;
 const WHITESPACE_ZERO = '';
@@ -48,7 +48,7 @@ const { googleSheetsApi, } = google;
 
 // scraping function
 const getCompute = async (
-  incomingDataGrid, writeSheetName, writeRange, writeSheetNamePost, pathToData,
+  incomingDataGrid, writeSheetName, writeRange, writeSheetNamePost,
 ) => {
   const TERMINATE_NOTICE = 'Latest result cell is still populated. Will not overwrite. Terminating now.';
 
@@ -70,16 +70,16 @@ const getCompute = async (
   } = JSON.parse( configApi, );
   
   // scrape page at incoming url for data
-  // let results = await initialize({ targetUrl, headers, payload, ajaxXhrUrl, pathToData, }); // returns json object from POST
+  let results = await initialize({ targetUrl, headers, payload, ajaxXhrUrl, pathToData, }); // returns json object from POST
   // // test 1
   // let results = [
   //   { name: 'alice'   , age: 21 , } ,
   //   { name: 'bob'     , age: 32 , } ,
   //   { name: 'charlie' , age: 43 , } ,
   // ];
-  // test 2
-  let results = resultsImport;
-  // const pathToData = [ 'properties', ];
+  // // test 2
+  // let results = resultsImport;
+  // // const pathToData = [ 'properties', ];
 
   // extract the relevant data from the pathToData
   const isPathToData = pathToData && pathToData.length;

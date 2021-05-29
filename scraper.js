@@ -31,7 +31,7 @@ const self = {
    * @example [ 'properties', ]
    */
   initialize: async ({
-    targetUrl, headers=false, payload=false, ajaxXhrUrl=false, pathToData=false,
+    targetUrl, headers=false, payload=false, ajaxXhrUrl=false, // pathToData=false,
   }) => {
     self.browser = await puppeteer.launch( BROWSER, );
     self.page = await self.browser.newPage();
@@ -170,7 +170,7 @@ const self = {
     }
     
     // cleanup
-    // await self.browser.close();
+    await self.browser.close();
 
     // console.log('(line 65) results\n', JSON.stringify( results, ));
     return results;
