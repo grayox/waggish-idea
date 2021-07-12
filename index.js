@@ -22,12 +22,13 @@
  */
 
 // imports
-const config  = require( './config'  );
-const scraper = require( './scraper'  );
-// const reddit  = require( './reddit'  );
-// const realtor = require( './realtor' );
-// const realtyTracValues = require( './realtyTracValues' );
-const google = require( './googleSheetsApi' );
+const config            = require( './config'                   );
+// const scraper           = require( './archive/scraper'          );
+// const reddit            = require( './archive/reddit'           );
+// const realtor           = require( './archive/realtor'          );
+// const realtyTracValues  = require( './archive/realtyTracValues' );
+const rentersWarehouse  = require( './archive/rentersWarehouse' );
+const google            = require( './googleSheetsApi'          );
 // const resultsImport = require ('./archive/tempdata-equator.json');
 // const resultsImport = require ('./archive/tempdata-realtytrac-post-b.json');
 
@@ -40,10 +41,11 @@ const timestamp = new Date();
 
 // destructured assignments
 const { GSHEETS_API_CONFIG, } = config;
-const { initialize, getResults, } = scraper;
+// const { initialize, getResults, } = scraper;
 // const { initialize, getResults, } = reddit;
 // const { initialize, getResults, } = realtor;
 // const { initialize, getResults, } = realtyTracValues;
+const { initialize, getResults, } = rentersWarehouse;
 const { googleSheetsApi, } = google;
 
 // scraping function
@@ -131,13 +133,13 @@ const getCompute = async (
       * @param { Object[] } arrayOfObjects
       * @returns { *[][] }
       */
-     const getDataGridFromArrayOfObjects = ( headerRow, arrayOfObjects, ) => {
-       const dataGrid = arrayOfObjects.map ( item =>
-         headerRow.map( headerLabel => item[ headerLabel ])
-       );
-       dataGrid.unshift( headerRow, );
-       return dataGrid;
-     }
+    const getDataGridFromArrayOfObjects = ( headerRow, arrayOfObjects, ) => {
+      const dataGrid = arrayOfObjects.map ( item =>
+        headerRow.map( headerLabel => item[ headerLabel ])
+      );
+      dataGrid.unshift( headerRow, );
+      return dataGrid;
+    }
 
     // get headers by searching all rows
     const headerRowSet = new Set();
@@ -175,7 +177,7 @@ const getCompute = async (
   results = await getResults(
     querySelectorAll, configSelectors, maxCountLimit, headers, payload,
   );
-  // // testing
+  // // test testing
   // console.log('results\n', JSON.stringify( results, ));
   // return results;
 
@@ -192,7 +194,7 @@ const getCompute = async (
 ( async () => await googleSheetsApi({ ...GSHEETS_API_CONFIG, getCompute, },))()
   .catch( e => console.log( e.message ));
 
-// // [ BEGIN ] testing notes
+// // [ BEGIN ] test testing notes
 
 // // working spreadsheet content
 // // {"orderId":"foo","targetUrl":"https://old.reddit.com/r/node","querySelectorAll":"#siteTable > div[class*=\"thing\"]","configSelectors":[["title","p.title","innerText"],["authorUrl","p.tagline > a.author","href"],["authorName","p.tagline > a.author","innerText"],["score","div.score.likes","innerText"]]}
