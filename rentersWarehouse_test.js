@@ -13,6 +13,9 @@
  * 
  * anti-scraping tech appears present
  * 
+ * obtain core source requests from
+ * developer tools XHR network requests
+ * 
  * @todo automate via integration with API interface
  * 
  * @version 0.0.0 
