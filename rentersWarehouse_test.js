@@ -1,7 +1,7 @@
 /** 
- * @name RentersWarehouseScraper
+ * @name RentersWarehouseAPI
  * 
- * @description scrapes renterswarehouse.com
+ * @description "dirty api" for renterswarehouse.com
  * 
  * below is standalone test version only
  * designed for exploring and testing
