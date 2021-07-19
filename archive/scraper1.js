@@ -18,14 +18,11 @@ const self = {
   /**
    * can handle http GET and POST requests
    * @see https://stackoverflow.com/a/49385769
-   * @param { Object } options
-   * @param { String } options.targetUrl the intended endpoint
-   * @param { Object | Boolean } [ options.payload = false ] for HTTP POST requests
-   * @param { Object | Boolean } [ options.headers = false ]
-   * @param { Object } [ options.args = {} ]
-   * @param { String } [ options.method = 'POST' ] for HTTP POST requests
-   * @param { String } [ options.ajaxXhrUrl = false ] for listening for a specific response from a specific xhr resource
+   * @param { String } targetUrl the intended endpoint
+   * @param { Object } [ payload = false ] for HTTP POST requests
+   * @param { Object } [ headers = false ] for HTTP POST requests
    * 
+   * @param { String } [ ajaxXhrUrl = false ] for listening for a specific response from a specific xhr resource
    * @see https://github.com/puppeteer/puppeteer/blob/9ef4153f6e3548ac3fd2ac75b4570343e53e3a0a/docs/api.md#pagewaitforresponseurlorpredicate-options
    * @see https://stackoverflow.com/a/57505637
    * @see https://stackoverflow.com/a/56689657
@@ -34,8 +31,7 @@ const self = {
    * @example [ 'properties', ]
    */
   initialize: async ({
-    targetUrl, headers=false, payload=false,
-    method=POST, args={}, ajaxXhrUrl=false, // pathToData=false,
+    targetUrl, headers=false, payload=false, ajaxXhrUrl=false, // pathToData=false,
   }) => {
     self.browser = await puppeteer.launch( BROWSER, );
     self.page = await self.browser.newPage();
@@ -58,7 +54,7 @@ const self = {
         
         // change request method and add post data
         const data = {
-          method, ...args,
+          method: POST,
           postData: JSON.stringify( payload, ),
           // postData: 'foo=FOO&bar=BAR', // { foo: 'FOO', bar: 'BAR', },
           headers: {
