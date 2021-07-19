@@ -79,7 +79,6 @@ const getCompute = async (
     ajaxXhrUrl, pathToData,
     method, args,
   });
-
   // @testing
   // // test 1
   // let results = [
