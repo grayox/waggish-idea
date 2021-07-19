@@ -22,12 +22,12 @@
  */
 
 // imports
-const config            = require( './config'                   );
-// const scraper           = require( './archive/scraper'          );
+const config            = require( './config'  );
+const scraper           = require( './scraper' );
 // const reddit            = require( './archive/reddit'           );
 // const realtor           = require( './archive/realtor'          );
 // const realtyTracValues  = require( './archive/realtyTracValues' );
-const rentersWarehouse  = require( './archive/rentersWarehouse' );
+// const rentersWarehouse  = require( './archive/rentersWarehouse' );
 const google            = require( './googleSheetsApi'          );
 // const resultsImport = require ('./archive/tempdata-equator.json');
 // const resultsImport = require ('./archive/tempdata-realtytrac-post-b.json');
@@ -41,11 +41,11 @@ const timestamp = new Date();
 
 // destructured assignments
 const { GSHEETS_API_CONFIG, } = config;
-// const { initialize, getResults, } = scraper;
+const { initialize, getResults, } = scraper;
 // const { initialize, getResults, } = reddit;
 // const { initialize, getResults, } = realtor;
 // const { initialize, getResults, } = realtyTracValues;
-const { initialize, getResults, } = rentersWarehouse;
+// const { initialize, getResults, } = rentersWarehouse;
 const { googleSheetsApi, } = google;
 
 // scraping function
@@ -69,10 +69,18 @@ const getCompute = async (
   const {
     targetUrl, headers, payload, ajaxXhrUrl, pathToData,
     orderId, querySelectorAll, configSelectors, maxCountLimit,
+    method, args,
   } = JSON.parse( configApi, );
   
   // scrape page at incoming url for data
-  let results = await initialize({ targetUrl, headers, payload, ajaxXhrUrl, pathToData, }); // returns json object from POST
+  // returns json object from POST
+  let results = await initialize({
+    targetUrl, headers, payload,
+    ajaxXhrUrl, pathToData,
+    method, args,
+  });
+
+  // @testing
   // // test 1
   // let results = [
   //   { name: 'alice'   , age: 21 , } ,
